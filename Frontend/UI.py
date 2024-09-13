@@ -1,1 +1,2 @@
-print("hello world")
+help = input("help")
+print(help)
