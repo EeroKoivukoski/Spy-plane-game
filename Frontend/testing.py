@@ -43,7 +43,16 @@ def main():
             i += 1
 
         # Valitse ja päivitä tämänhetkinen kenttä & kilometrit
-        selection = int(input("\nEnter a number to continue: ")) - 1
+        # Eero: Nyt jos kirjoittaa kirjaimen se kysyy uudelleen numeroa
+        while True:
+            selection = input("\nEnter a number to continue: ")
+            try:
+                val = int(selection)
+            except ValueError:
+                print("That's not a number!")
+            else:
+                break
+        selection = int(selection)-1
         km_flown += round(calculate_distance(current, closest[selection]))
         current = closest[selection]
 
