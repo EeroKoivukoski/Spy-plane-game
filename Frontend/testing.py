@@ -42,24 +42,32 @@ def main():
 
 
 def get_closest_airports(current, count):
+    # Hae kaikki kentät listaan
     airports = get_airports()
+    # Järjestä lista: jokaisen kohdalla laskee etäisyyden
     airports.sort(key=lambda d: calculate_distance(current, d))
     return airports[1:count+1]
 
 
 def calculate_distance(current, target):
+    # Laskee etäisyyden koordinaattien välillä geopy-kirjaston avulla
     a = (current["latitude"], current["longitude"])
     b = (target["latitude"], target["longitude"])
     return distance.distance(a, b).km
 
 
+# Hakee kaikki lentokentät
 def get_airports():
+    # SQL-kysely
     sql = "select name, latitude_deg, longitude_deg, iso_country from airport where continent='EU' and type='large_airport'"
     cursor = connection.cursor()
     cursor.execute(sql)
     result = cursor.fetchall()
 
+    # Tee lista jossa sisällä sanakirjassa sql-kyselyn result
     airports = []
+
+    # Loop kyselyn resultien läpi, lisää tiedot sanakirjaan -> sanakirja listaan
     for i in result:
         airport = {
             "name": i[0],
@@ -69,9 +77,11 @@ def get_airports():
         }
         airports.append(airport)
 
+    # Palauta lista
     return airports
 
 
+# Hae maan nimi ISO-koodin perusteella
 def get_country_by_code(iso):
     sql = f'select name from country where iso_country = "{iso}"'
     cursor = connection.cursor()
