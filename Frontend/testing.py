@@ -1,15 +1,14 @@
 import random
 import mysql.connector
 from geopy import distance
-
-#M8r!8DBe!ole8utom88tt1 eero
+import tietokantatunnukset
 
 connection = mysql.connector.connect(
     host="127.0.0.1",
     port=3306,
     database="flight_game",
-    user="root",
-    password="",
+    user=tietokantatunnukset.user,
+    password=tietokantatunnukset.password,
     autocommit=True
 )
 
