@@ -23,22 +23,23 @@ def minipeli(x):
     #Esimerkki
     if x == 1:
         print("Tämä toiminto ei ole vielä valmis mutta olisi helppo ja mukava tapa tehdä pelistä kiinnostavampi")
-    #Satunnainen tapahtuma
+    #HQ saa selville ulkonäön osan
     elif x == 2:
-        print("Gaming!")
+        print("HQ calls you and tells you that they found new data on the suspect")
         return 2
     #Ruokaika
     elif x == 3:
-        print("Löydät lentokentältä hyvän ruokapaikan ja syöt siellä.")
+        print("You eat at the airport")
         return 1
     #Hukkunut lippu
     elif x == 4:
-        print("Pudotat lentolippusi vahingossa jonnekin. Jäätkö etsimään sitä vai ostatko uuden?")
-        z=input("Jäätkö (1/2): ")
+        print("You accidentally drop your ticket.")
+        z=input("Do you stay a day to find your ticket  (1/2): ")
         if z == 1:
-            print("jäät etsimään")
+            print("You stay to search for it")
+            return 1
         else:
-            print("lähdet uudella lipulla")
+            print("You leave the airport thinking about your dear lost ticket :(.")
             return 3
     #Tappelu konnien kanssa
     elif x == 5:
