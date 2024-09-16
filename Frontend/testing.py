@@ -26,11 +26,12 @@ def main():
     # Main loop
     while True:
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
-        print(f"You have travelled {km_flown} km.\n")
+        print(f"You have travelled {km_flown} km.")
         print("Where would you like to fly next?\n")
 
         # Hae 10 lähintä lentokenttää listaan
-        closest = get_closest_airports(current, 10)
+        #closest = get_closest_airports(current, 10)
+        closest = get_airports_radius(current, 500)
 
         # Loop lähimpien kenttien läpi
         i = 1
@@ -63,6 +64,16 @@ def calculate_distance(current, target):
     a = (current["latitude"], current["longitude"])
     b = (target["latitude"], target["longitude"])
     return distance.distance(a, b).km
+
+
+def get_airports_radius(current, radius_km):
+    airports = get_airports()
+    out = []
+    for i in airports:
+        dist = calculate_distance(current, i)
+        if dist < radius_km and current["name"] != i["name"]:
+           out.append(i)
+    return out
 
 
 # Hakee kaikki lentokentät
