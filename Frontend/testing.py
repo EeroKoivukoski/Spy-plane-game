@@ -49,14 +49,13 @@ def main():
         while True:
             selection = input("\nEnter a number to continue: ")
             try:
-                selection = int(selection)
                 closest[int(selection) - 1]
             except ValueError:
                 print("That's not a number!")
             except IndexError:
                 print("That's not a valid number!")
             else:
-                selection = int(selection) - 1
+                selection=int(selection)-1
                 if selection < 0:
                     print("That's not a valid number!")
                 else:
