@@ -2,6 +2,7 @@ import random
 import mysql.connector
 from geopy import distance
 import tietokantatunnukset
+from Usualsuspects import numerochecker
 
 #asenna python packaget geopy, mysql-connector-python 8.0.29
 
@@ -17,6 +18,51 @@ connection = mysql.connector.connect(
 player = {}
 enemy = {}
 
+# Eero: tähän funktioon tulee satunnaisten tapahtumien koodi jotka tapahtuvat jokaisen lennon jälkeen
+def minipeli(x):
+    #Esimerkki
+    if x == 1:
+        print("Tämä toiminto ei ole vielä valmis mutta olisi helppo ja mukava tapa tehdä pelistä kiinnostavampi")
+    #Satunnainen tapahtuma
+    elif x == 2:
+        print("Gaming!")
+        return 2
+    #Ruokaika
+    elif x == 3:
+        print("Löydät lentokentältä hyvän ruokapaikan ja syöt siellä.")
+        return 1
+    #Hukkunut lippu
+    elif x == 4:
+        print("Pudotat lentolippusi vahingossa jonnekin. Jäätkö etsimään sitä vai ostatko uuden?")
+        z=input("Jäätkö (1/2): ")
+        if z == 1:
+            print("jäät etsimään")
+        else:
+            print("lähdet uudella lipulla")
+            return 3
+    #Tappelu konnien kanssa
+    elif x == 5:
+        print('''
+        You are moving through the airport until you come accross three intimidating fellows.
+        One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
+
+        You have two choises, either run or fight.
+        ''')
+        while True:
+            y = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (input 1/2): ')
+            numerochecker(y)
+            y=int(y)
+            if y == 1:
+                z = random.randint(1, 2)
+                if z == 1:
+                    print("You win the fight and interrogate the goons!")
+                    return 2
+                else:
+                    print("You lose to the goons and have to waste a week resting.")
+                    return 3
+            else:
+                print("You successfully run away!")
+                return 1
 
 def main():
     # Aloita random lentokentältä
@@ -29,6 +75,10 @@ def main():
     while True:
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
         print(f"You have travelled {km_flown} km.")
+        rngpeli=random.randint(1,5)
+        voitto=minipeli(rngpeli)
+        if voitto == 2:
+            print("you gained a clue")
         print("Where would you like to fly next?\n")
 
         # Hae 10 lähintä lentokenttää listaan
