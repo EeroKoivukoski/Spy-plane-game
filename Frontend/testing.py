@@ -49,7 +49,7 @@ def main():
         while True:
             selection = input("\nEnter a number to continue: ")
             try:
-                val = int(selection)
+                selection = int(selection)
             except ValueError:
                 print("That's not a number!")
             else:
