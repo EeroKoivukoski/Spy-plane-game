@@ -80,7 +80,6 @@ def main():
     while True:
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
         print(f"You have travelled {km_flown} km in {day} days.")
-        input("-Press enter to continue-")
         day += 1
 
         #rng valitsee satunnaisen pelin ja antaa vastaukseksi 1-3 pelaajan päätöksien myötä.
