@@ -7,5 +7,5 @@ def numerochecker(y):
         else:
             y = int(y)
             if y == 1 or y == 2:
-                return
+                return y
         y=input("Enter the input: ")

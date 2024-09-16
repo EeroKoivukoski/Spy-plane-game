@@ -18,35 +18,71 @@ connection = mysql.connector.connect(
 player = {}
 enemy = {}
 
+# Eero: tähän funktioon tulee satunnaisten tapahtumien koodi jotka tapahtuvat jokaisen lennon jälkeen
+def minipeli(x):
+    #Esimerkki
+    if x == 1:
+        print("Tämä toiminto ei ole vielä valmis mutta olisi helppo ja mukava tapa tehdä pelistä kiinnostavampi")
+    #HQ saa selville ulkonäön osan
+    elif x == 2:
+        print("HQ calls you and tells you that they found new data on the suspect")
+        return 2
+    #Ruokaika
+    elif x == 3:
+        print("You eat at the airport")
+        return 1
+    #Hukkunut lippu
+    elif x == 4:
+        print("You accidentally drop your ticket.")
+        z=input("Do you stay a day to find your ticket  (1/2): ")
+        if z == 1:
+            print("You stay to search for it")
+            return 1
+        else:
+            print("You leave the airport thinking about your dear lost ticket :(.")
+            return 3
+    #Tappelu konnien kanssa
+    elif x == 5:
+        print('''
+        You are moving through the airport until you come accross three intimidating fellows.
+        One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
+
+        You have two choises, either run or fight.
+        ''')
+        while True:
+            y = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (input 1/2): ')
+            numerochecker(y)
+            y=int(y)
+            if y == 1:
+                z = random.randint(1, 2)
+                if z == 1:
+                    print("You win the fight and interrogate the goons!")
+                    return 2
+                else:
+                    print("You lose to the goons and have to waste a week resting.")
+                    return 3
+            else:
+                print("You successfully run away!")
+                return 1
 
 def main():
     # Aloita random lentokentältä
     current = random.choice(get_airports())
-
-    # Rosvo random kentälle (todo: varmista että tarpeeksi kaukana pelaajasta)
-    enemy_airport = random.choice(get_airports())
 
     # Lennetyt kilometrit
     km_flown = 0
 
     # Main loop
     while True:
-        print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.\n")
+        print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
         print(f"You have travelled {km_flown} km.")
-
-        # Aloita minipeli
         rngpeli=random.randint(1,5)
         voitto=minipeli(rngpeli)
         if voitto == 2:
             print("you gained a clue")
-
-        input("\nPress Enter to continue...")
-
         print("Where would you like to fly next?\n")
-        print(f"{navigation(current, enemy_airport)}  (funktio kokeilun vuoksi - systeemiä ei pakko käyttää)\n")
 
         # Hae 10 lähintä lentokenttää listaan
-        # TODO: fiksumpi tapa tehdä tämä, näin voi jäädä kenttiä pois tai jumiin
         #closest = get_closest_airports(current, 10)
         closest = get_airports_radius(current, 500)
 
@@ -79,58 +115,6 @@ def main():
         current = closest[selection]
 
 
-# Eero: tähän funktioon tulee satunnaisten tapahtumien koodi jotka tapahtuvat jokaisen lennon jälkeen
-def minipeli(x):
-    #Esimerkki
-    if x == 1:
-        print("Tämä toiminto ei ole vielä valmis mutta olisi helppo ja mukava tapa tehdä pelistä kiinnostavampi")
-
-    #HQ saa selville ulkonäön osan
-    elif x == 2:
-        print("HQ calls you and tells you that they found new data on the suspect")
-        return 2
-
-    #Ruokaika
-    elif x == 3:
-        print("You eat at the airport")
-        return 1
-
-    #Hukkunut lippu
-    elif x == 4:
-        print("You accidentally drop your ticket.")
-        z=input("Do you stay a day to find your ticket  (1/2): ")
-        if z == 1:
-            print("You stay to search for it")
-            return 1
-        else:
-            print("You leave the airport thinking about your dear lost ticket :(.")
-            return 3
-
-    #Tappelu konnien kanssa
-    elif x == 5:
-        print('''
-        You are moving through the airport until you come across three intimidating fellows.
-        One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
-
-        You have two choices, either run or fight.
-        ''')
-        while True:
-            y = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (input 1/2): ')
-            numerochecker(y)
-            y=int(y)
-            if y == 1:
-                z = random.randint(1, 2)
-                if z == 1:
-                    print("You win the fight and interrogate the goons!")
-                    return 2
-                else:
-                    print("You lose to the goons and have to waste a week resting.")
-                    return 3
-            else:
-                print("You successfully run away!")
-                return 1
-
-
 def get_closest_airports(current, count):
     # Hae kaikki kentät listaan
     airports = get_airports()
@@ -149,7 +133,6 @@ def calculate_distance(current, target):
     return distance.distance(a, b).km
 
 
-# Palauta lista lentokentistä säteen (km) sisällä
 def get_airports_radius(current, radius_km):
     airports = get_airports()
     out = []
@@ -181,6 +164,7 @@ def get_airports():
         }
         airports.append(airport)
 
+    # Palauta lista
     return airports
 
 
@@ -191,35 +175,6 @@ def get_country_by_code(iso):
     cursor.execute(sql)
     result = cursor.fetchall()
     return result[0][0]
-
-
-def navigation(current, target):
-    if round(calculate_distance(current, target)) == 0:
-        return "You are at the same airport as your target!"
-
-    a = (current["latitude"], current["longitude"])
-    b = (target["latitude"], current["longitude"])
-    latitude_dist = round(distance.distance(a, b).km)
-
-    a = (current["latitude"], current["longitude"])
-    b = (current["latitude"], target["longitude"])
-    longitude_dist = round(distance.distance(a, b).km)
-
-    latitude_out = ""
-
-    if current["latitude"] <= target["latitude"]:
-        latitude_out += f"{latitude_dist} km north"
-    else:
-        latitude_out += f"{latitude_dist} km south"
-
-    longitude_out = ""
-
-    if current["longitude"] <= target["longitude"]:
-        longitude_out += f"{longitude_dist} km east"
-    else:
-        longitude_out += f"{longitude_dist} km west"
-
-    return f"Your target is {latitude_out} and {longitude_out} of you."
 
 
 main()
