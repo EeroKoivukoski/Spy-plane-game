@@ -20,7 +20,7 @@ def main():
     # Aloita random lentokentältä
     current = random.choice(get_airports())
 
-    # Loop
+    # Main loop
     while True:
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.\n")
         print("Where would you like to fly next?\n")
@@ -44,8 +44,11 @@ def main():
 def get_closest_airports(current, count):
     # Hae kaikki kentät listaan
     airports = get_airports()
+
     # Järjestä lista: jokaisen kohdalla laskee etäisyyden
     airports.sort(key=lambda d: calculate_distance(current, d))
+
+    # Palauta listasta indeksit 1 -> count+1 (0 = nykyinen kenttä)
     return airports[1:count+1]
 
 
@@ -64,10 +67,10 @@ def get_airports():
     cursor.execute(sql)
     result = cursor.fetchall()
 
-    # Tee lista jossa sisällä sanakirjassa sql-kyselyn result
+    # Tee lista johon tulee lentokentät
     airports = []
 
-    # Loop kyselyn resultien läpi, lisää tiedot sanakirjaan -> sanakirja listaan
+    # Loop tuloksien läpi, luo sanakirja lentokentälle -> sanakirja listaan
     for i in result:
         airport = {
             "name": i[0],
@@ -81,7 +84,7 @@ def get_airports():
     return airports
 
 
-# Hae maan nimi ISO-koodin perusteella
+# Hae tietokannasta maan nimi ISO-koodin perusteella
 def get_country_by_code(iso):
     sql = f'select name from country where iso_country = "{iso}"'
     cursor = connection.cursor()
