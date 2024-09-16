@@ -20,9 +20,13 @@ def main():
     # Aloita random lentokentältä
     current = random.choice(get_airports())
 
+    # Lennetyt kilometrit
+    km_flown = 0
+
     # Main loop
     while True:
-        print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.\n")
+        print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
+        print(f"You have travelled {km_flown} km.\n")
         print("Where would you like to fly next?\n")
 
         # Hae 10 lähintä lentokenttää listaan
@@ -37,8 +41,10 @@ def main():
             print(f"[{i}] {airport['name']} ({airport['country']}) (Distance: {dist} km)")
             i += 1
 
-        # Valitse ja päivitä tämänhetkinen kenttä
-        current = closest[int(input("\nEnter a number to continue: "))-1]
+        # Valitse ja päivitä tämänhetkinen kenttä & kilometrit
+        selection = int(input("\nEnter a number to continue: ")) - 1
+        km_flown += round(calculate_distance(current, closest[selection]))
+        current = closest[selection]
 
 
 def get_closest_airports(current, count):
