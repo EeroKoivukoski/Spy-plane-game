@@ -7,7 +7,7 @@ connection = mysql.connector.connect(
     port=3306,
     database="flight_game",
     user="root",
-    password="M8r!8DBe!ole8utom88tt1",
+    password="kahvikuppi789",
     autocommit=True
 )
 
@@ -16,19 +16,27 @@ enemy = {}
 
 
 def main():
+    # Aloita random lentokentältä
     current = random.choice(get_airports())
 
+    # Loop
     while True:
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.\n")
         print("Where would you like to fly next?\n")
 
+        # Hae 10 lähintä lentokenttää listaan
         closest = get_closest_airports(current, 10)
+
+        # Loop lähimpien kenttien läpi
         i = 1
         for airport in closest:
+
+            # Tulosta kentän tiedot
             dist = round(calculate_distance(current, airport))
             print(f"[{i}] {airport['name']} ({airport['country']}) (Distance: {dist} km)")
             i += 1
 
+        # Valitse ja päivitä tämänhetkinen kenttä
         current = closest[int(input("\nEnter a number to continue: "))-1]
 
 
