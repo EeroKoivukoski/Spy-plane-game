@@ -23,6 +23,7 @@ def minipeli(x):
     #Esimerkki
     if x == 1:
         print("Tämä toiminto ei ole vielä valmis mutta olisi helppo ja mukava tapa tehdä pelistä kiinnostavampi")
+        return 1
     #HQ saa selville ulkonäön osan
     elif x == 2:
         print("HQ calls you and tells you that they found new data on the suspect")
@@ -34,52 +35,68 @@ def minipeli(x):
     #Hukkunut lippu
     elif x == 4:
         print("You accidentally drop your ticket.")
-        z=input("Do you stay a day to find your ticket  (1/2): ")
-        if z == 1:
+        y=input("Do you stay a day to find your ticket  (1/2): ")
+        y=numerochecker(y)
+        if y == 1:
             print("You stay to search for it")
-            return 1
+            return 3
         else:
             print("You leave the airport thinking about your dear lost ticket :(.")
-            return 3
+            return 1
     #Tappelu konnien kanssa
     elif x == 5:
         print('''
-        You are moving through the airport until you come accross three intimidating fellows.
-        One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
+You are moving through the airport until you come accross three intimidating fellows.
+One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
 
-        You have two choises, either run or fight.
+You have two choises, either run or fight.
         ''')
-        while True:
-            y = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (input 1/2): ')
-            numerochecker(y)
-            y=int(y)
-            if y == 1:
-                z = random.randint(1, 2)
-                if z == 1:
-                    print("You win the fight and interrogate the goons!")
-                    return 2
-                else:
-                    print("You lose to the goons and have to waste a week resting.")
-                    return 3
+        y = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (input 1/2): ')
+        y=numerochecker(y)
+        y=int(y)
+        if y == 1:
+            z = random.randint(1, 2)
+            if z == 1:
+                print("You win the fight and interrogate the goons!")
+                return 2
             else:
-                print("You successfully run away!")
-                return 1
+                print("You lose to the goons and have to waste a day resting.")
+                return 3
+        else:
+            print("You successfully run away!")
+            return 1
 
+# Pelin pää loopin koodi
 def main():
     # Aloita random lentokentältä
     current = random.choice(get_airports())
 
     # Lennetyt kilometrit
-    km_flown = 0
+    km_flown =0
+    # Menneet päivät
+    day=0
 
     # Main loop
     while True:
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
-        print(f"You have travelled {km_flown} km.")
+        print(f"You have travelled {km_flown} km in {day} days.")
+        input("-Press enter to continue-")
+        day += 1
+
+        #rng valitsee satunnaisen pelin ja antaa vastaukseksi 1-3 pelaajan päätöksien myötä.
         rngpeli=random.randint(1,5)
         voitto=minipeli(rngpeli)
+
+        #Eri voittotilanteet
+        if voitto == 1:
+            input("-Press enter to continue-")
         if voitto == 2:
             print("you gained a clue")
+            input("-Press Enter to continue-")
+        if voitto == 3:
+            print("You wasted a day!")
+            input("-Press Enter to continue-")
+            day+=1
         print("Where would you like to fly next?\n")
 
         # Hae 10 lähintä lentokenttää listaan
