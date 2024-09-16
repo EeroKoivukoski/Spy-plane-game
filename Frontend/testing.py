@@ -2,12 +2,14 @@ import random
 import mysql.connector
 from geopy import distance
 
+#M8r!8DBe!ole8utom88tt1 eero
+
 connection = mysql.connector.connect(
     host="127.0.0.1",
     port=3306,
     database="flight_game",
     user="root",
-    password="kahvikuppi789",
+    password="",
     autocommit=True
 )
 
