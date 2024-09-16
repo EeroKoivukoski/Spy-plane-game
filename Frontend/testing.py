@@ -206,14 +206,12 @@ def navigation(current, target):
     longitude_dist = round(distance.distance(a, b).km)
 
     latitude_out = ""
-
     if current["latitude"] <= target["latitude"]:
         latitude_out += f"{latitude_dist} km north"
     else:
         latitude_out += f"{latitude_dist} km south"
 
     longitude_out = ""
-
     if current["longitude"] <= target["longitude"]:
         longitude_out += f"{longitude_dist} km east"
     else:
