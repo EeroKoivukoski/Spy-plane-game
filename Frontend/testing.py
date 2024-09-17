@@ -31,17 +31,22 @@ def main():
 
     # Lennetyt kilometrit
     km_flown = 0
-
+    #mennet päivät
+    day=0
     # Main loop
     while True:
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.\n")
-        print(f"You have travelled {km_flown} km.")
+        print(f"You have travelled {km_flown} km in {day} day(s).")
+        day+=1
 
         # Aloita minipeli
         rngpeli = random.randint(1,5)
         voitto = minipeli(rngpeli)
         if voitto == 2:
-            print("you gained a clue")
+            print("You gained a clue!")
+        elif voitto == 3:
+            print("You wasted a day!")
+            day+=1
 
         input("\nPress Enter to continue...")
 
