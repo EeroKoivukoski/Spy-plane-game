@@ -24,6 +24,8 @@ def main():
     current = random.choice(get_airports())
 
     # Rosvo random kentälle (todo: varmista että tarpeeksi kaukana pelaajasta)
+    #Haris: koitan rakentaa tälle kaukasen spawnpisteen
+
     enemy_airport = random.choice(get_airports())
 
 
