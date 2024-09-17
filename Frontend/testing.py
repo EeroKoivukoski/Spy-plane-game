@@ -81,54 +81,51 @@ def main():
 
 # Eero: tähän funktioon tulee satunnaisten tapahtumien koodi jotka tapahtuvat jokaisen lennon jälkeen
 def minipeli(x):
-    #Esimerkki
+    # Esimerkki
     if x == 1:
         print("Tämä toiminto ei ole vielä valmis mutta olisi helppo ja mukava tapa tehdä pelistä kiinnostavampi")
-
-    #HQ saa selville ulkonäön osan
+        return 1
+    # HQ saa selville ulkonäön osan
     elif x == 2:
         print("HQ calls you and tells you that they found new data on the suspect")
         return 2
-
-    #Ruokaika
+    # Ruokaika
     elif x == 3:
         print("You eat at the airport")
         return 1
-
-    #Hukkunut lippu
+    # Hukkunut lippu
     elif x == 4:
         print("You accidentally drop your ticket.")
-        z=input("Do you stay a day to find your ticket  (1/2): ")
-        if z == 1:
+        y = input("Do you stay a day to find your ticket  (1/2): ")
+        y = numerochecker(y)
+        if y == 1:
             print("You stay to search for it")
-            return 1
+            return 3
         else:
             print("You leave the airport thinking about your dear lost ticket :(.")
-            return 3
-
-    #Tappelu konnien kanssa
+            return 1
+    # Tappelu konnien kanssa
     elif x == 5:
         print('''
-        You are moving through the airport until you come across three intimidating fellows.
-        One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
+You are moving through the airport until you come accross three intimidating fellows.
+One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
 
-        You have two choices, either run or fight.
-        ''')
-        while True:
-            y = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (input 1/2): ')
-            numerochecker(y)
-            y=int(y)
-            if y == 1:
-                z = random.randint(1, 2)
-                if z == 1:
-                    print("You win the fight and interrogate the goons!")
-                    return 2
-                else:
-                    print("You lose to the goons and have to waste a week resting.")
-                    return 3
+You have two choises, either run or fight.
+            ''')
+        y = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (input 1/2): ')
+        y = numerochecker(y)
+        y = int(y)
+        if y == 1:
+            z = random.randint(1, 2)
+            if z == 1:
+                print("You win the fight and interrogate the goons!")
+                return 2
             else:
-                print("You successfully run away!")
-                return 1
+                print("You lose to the goons and have to waste a day resting.")
+                return 3
+        else:
+            print("You successfully run away!")
+            return 1
 
 
 def get_closest_airports(current, count):
