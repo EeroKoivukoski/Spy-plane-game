@@ -26,6 +26,7 @@ def main():
     # Rosvo random kentälle (todo: varmista että tarpeeksi kaukana pelaajasta)
     enemy_airport = random.choice(get_airports())
 
+
     # Lennetyt kilometrit
     km_flown = 0
 
@@ -216,6 +217,8 @@ def navigation(current, target):
         longitude_out += f"{longitude_dist} km west"
 
     return f"Your target is {latitude_out} and {longitude_out} of you."
+
+
 
 
 main()
