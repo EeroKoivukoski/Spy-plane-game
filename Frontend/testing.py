@@ -20,35 +20,35 @@ enemy = {}
 
 
 def main():
-    # Aloita random lentokentältä
-    current = random.choice(get_airports())
+    all_airports = get_airports()
 
-    # Rosvo random kentälle (todo: varmista että tarpeeksi kaukana pelaajasta)
-    enemy_airport = random.choice(get_airports())
+    # Pelaaja ja rosvo random kentillä (todo: varmista että rosvo tarpeeksi kaukana pelaajasta)
+    current = random.choice(all_airports)
+    enemy_airport = random.choice(all_airports)
 
-    # Lennetyt kilometrit
+    # Muuttujat
     km_flown = 0
-    #mennet päivät
-    day=0
+    day = 0
+
     # Main loop
     while True:
-        print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.\n")
-        print(f"You have travelled {km_flown} km in {day} day(s).")
-        day+=1
+        print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
+        print(f"You have travelled {km_flown} km in {day} day(s).\n")
+
+        day += 1
 
         # Aloita minipeli
-        rngpeli = random.randint(1,5)
-        voitto = minipeli(rngpeli)
+        voitto = minipeli(random.randint(1,5))
         if voitto == 2:
             print("You gained a clue!")
         elif voitto == 3:
             print("You wasted a day!")
             day+=1
 
-        input("\nPress Enter to continue...")
+        input("\nPress Enter to continue...\n")
 
-        print("Where would you like to fly next?\n")
-
+        print("Where would you like to fly next?")
+        print(f"You are currently at {current['name']} in {current['country']}.")
         # Navigaatiosysteemi kokeilun vuoksi - ei pakko käyttää
         print(f"{navigation(current, enemy_airport)}\n")
 
@@ -90,20 +90,20 @@ def main():
 def minipeli(x):
     # Esimerkki
     if x == 1:
-        print("Tämä toiminto ei ole vielä valmis mutta olisi helppo ja mukava tapa tehdä pelistä kiinnostavampi")
+        print("Tämä toiminto ei ole vielä valmis mutta olisi helppo ja mukava tapa tehdä pelistä kiinnostavampi.")
         return 1
     # HQ saa selville ulkonäön osan
     elif x == 2:
-        print("HQ calls you and tells you that they found new data on the suspect")
+        print("HQ calls you and tells you that they found new data on the suspect.")
         return 2
     # Ruokaika
     elif x == 3:
-        print("You eat at the airport")
+        print("You eat at the airport.")
         return 1
     # Hukkunut lippu
     elif x == 4:
         print("You accidentally drop your ticket.")
-        y = input("Do you stay a day to find your ticket  (1/2): ")
+        y = input("Do you stay a day to find your ticket? (1/2): ")
         y = numerochecker(y,2)
         if y == 1:
             print("You stay to search for it")
