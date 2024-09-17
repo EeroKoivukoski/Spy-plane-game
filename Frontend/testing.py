@@ -35,8 +35,8 @@ def main():
         print(f"You have travelled {km_flown} km.")
 
         # Aloita minipeli
-        rngpeli=random.randint(1,5)
-        voitto=minipeli(rngpeli)
+        rngpeli = random.randint(1,5)
+        voitto = minipeli(rngpeli)
         if voitto == 2:
             print("you gained a clue")
 
@@ -47,13 +47,12 @@ def main():
 
         # Hae 10 lähintä lentokenttää listaan
         # TODO: fiksumpi tapa tehdä tämä, näin voi jäädä kenttiä pois tai jumiin
-        #closest = get_closest_airports(current, 10)
-        closest = get_airports_radius(current, 500)
+        closest = get_closest_airports(current, 15)
+        #closest = get_airports_radius(current, 500)
 
         # Loop lähimpien kenttien läpi
         i = 1
         for airport in closest:
-
             # Tulosta kentän tiedot
             dist = round(calculate_distance(current, airport))
             print(f"[{i}] {airport['name']} ({airport['country']}) (Distance: {dist} km)")
@@ -70,11 +69,12 @@ def main():
             except IndexError:
                 print("That's not a valid number!")
             else:
-                selection=int(selection)-1
+                selection = int(selection)-1
                 if selection < 0:
                     print("That's not a valid number!")
                 else:
                     break
+
         km_flown += round(calculate_distance(current, closest[selection]))
         current = closest[selection]
 
@@ -197,20 +197,18 @@ def navigation(current, target):
     if round(calculate_distance(current, target)) == 0:
         return "You are at the same airport as your target!"
 
-    a = (current["latitude"], current["longitude"])
-    b = (target["latitude"], current["longitude"])
-    latitude_dist = round(distance.distance(a, b).km)
+    current_coords = (current["latitude"], current["longitude"])
 
-    a = (current["latitude"], current["longitude"])
-    b = (current["latitude"], target["longitude"])
-    longitude_dist = round(distance.distance(a, b).km)
-
+    target_coords = (target["latitude"], current["longitude"])
+    latitude_dist = round(distance.distance(current_coords, target_coords).km)
     latitude_out = ""
     if current["latitude"] <= target["latitude"]:
         latitude_out += f"{latitude_dist} km north"
     else:
         latitude_out += f"{latitude_dist} km south"
 
+    target_coords = (current["latitude"], target["longitude"])
+    longitude_dist = round(distance.distance(current_coords, target_coords).km)
     longitude_out = ""
     if current["longitude"] <= target["longitude"]:
         longitude_out += f"{longitude_dist} km east"
