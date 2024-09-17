@@ -61,7 +61,7 @@ def main():
         i = 1
         for airport in closest:
             # Tulosta kentän tiedot
-            dist = round(calculate_distance(current, airport))
+            dist = calculate_distance(current, airport)
             print(f"[{i}] {airport['name']} ({airport['country']}) (Distance: {dist} km)")
             i += 1
 
@@ -82,7 +82,7 @@ def main():
                 else:
                     break
 
-        km_flown += round(calculate_distance(current, closest[selection]))
+        km_flown += calculate_distance(current, closest[selection])
         current = closest[selection]
 
 
@@ -150,7 +150,8 @@ def calculate_distance(current, target):
     # Laskee etäisyyden koordinaattien välillä geopy-kirjaston avulla
     a = (current["latitude"], current["longitude"])
     b = (target["latitude"], target["longitude"])
-    return distance.distance(a, b).km
+    dist = round(distance.distance(a,b).km)
+    return dist
 
 
 # Palauta lista lentokentistä säteen (km) sisällä
@@ -159,7 +160,7 @@ def get_airports_radius(current, radius_km):
     out = []
     for i in airports:
         dist = calculate_distance(current, i)
-        if dist < radius_km and current["name"] != i["name"]:
+        if dist <= radius_km and current["name"] != i["name"]:
            out.append(i)
     return out
 
@@ -198,7 +199,7 @@ def get_country_by_code(iso):
 
 
 def navigation(current, target):
-    if round(calculate_distance(current, target)) == 0:
+    if calculate_distance(current, target) == 0:
         return "You are at the same airport as your target!"
 
     current_coords = (current["latitude"], current["longitude"])
