@@ -117,7 +117,7 @@ def minipeli(x):
 You are moving through the airport until you come accross three intimidating fellows.
 One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
 
-You have two choises, either run or fight.
+You have two choices, either run or fight.
             ''')
         y = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (input 1/2): ')
         y = numerochecker(y,2)
