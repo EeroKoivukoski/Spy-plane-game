@@ -102,7 +102,7 @@ def minipeli(x):
     elif x == 4:
         print("You accidentally drop your ticket.")
         y = input("Do you stay a day to find your ticket  (1/2): ")
-        y = numerochecker(y)
+        y = numerochecker(y,2)
         if y == 1:
             print("You stay to search for it")
             return 3
@@ -118,7 +118,7 @@ One of the goons whispers to the other "hey, isn't that the guy we're supposed t
 You have two choises, either run or fight.
             ''')
         y = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (input 1/2): ')
-        y = numerochecker(y)
+        y = numerochecker(y,2)
         y = int(y)
         if y == 1:
             z = random.randint(1, 2)
