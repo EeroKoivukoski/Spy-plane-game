@@ -43,7 +43,9 @@ def main():
         input("\nPress Enter to continue...")
 
         print("Where would you like to fly next?\n")
-        print(f"{navigation(current, enemy_airport)}  (funktio kokeilun vuoksi - systeemiä ei pakko käyttää)\n")
+
+        # Navigaatiosysteemi kokeilun vuoksi - ei pakko käyttää
+        print(f"{navigation(current, enemy_airport)}\n")
 
         # Hae 10 lähintä lentokenttää listaan
         # TODO: fiksumpi tapa tehdä tämä, näin voi jäädä kenttiä pois tai jumiin
@@ -203,17 +205,17 @@ def navigation(current, target):
     latitude_dist = round(distance.distance(current_coords, target_coords).km)
     latitude_out = ""
     if current["latitude"] <= target["latitude"]:
-        latitude_out += f"{latitude_dist} km north"
+        latitude_out = f"{latitude_dist} km north"
     else:
-        latitude_out += f"{latitude_dist} km south"
+        latitude_out = f"{latitude_dist} km south"
 
     target_coords = (current["latitude"], target["longitude"])
     longitude_dist = round(distance.distance(current_coords, target_coords).km)
     longitude_out = ""
     if current["longitude"] <= target["longitude"]:
-        longitude_out += f"{longitude_dist} km east"
+        longitude_out = f"{longitude_dist} km east"
     else:
-        longitude_out += f"{longitude_dist} km west"
+        longitude_out = f"{longitude_dist} km west"
 
     return f"Your target is {latitude_out} and {longitude_out} of you."
 
