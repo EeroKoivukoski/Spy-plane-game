@@ -27,7 +27,6 @@ def main():
 
 
 def generate_person():
-    person = {}
     features = {
         "height":
             ["Short",
@@ -43,21 +42,24 @@ def generate_person():
              "woman"],
         "head":
             ["blonde hair",
-             "brown hair",
+             "dark hair",
              "long hair",
-             "no hair",
+             "a bald head",
              "a baseball cap",
              "sunglasses",
-             "headphones"],
+             "headphones",
+             "a clearly fake moustache"],
         "clothes":
             ["a hawaiian shirt",
              "a suit",
              "a dress",
              "a hoodie",
              "a denim jacket",
-             "sweatpants"]
+             "sweatpants",
+             "student overalls"]
     }
 
+    person = {}
     for feature in features:
         person[feature] = random.choice(features[feature])
 
