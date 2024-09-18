@@ -8,7 +8,7 @@ def main():
     enemy = generate_person()
     print(f"THIEF: {describe_person(enemy)}\n")
 
-    print("You see the following people...\nWho is the spy?\n")
+    print("You see the following people...\nWho is the thief?\n")
     enemy_index = random.randint(0,9)
     for i in range(10):
         if i == enemy_index:
