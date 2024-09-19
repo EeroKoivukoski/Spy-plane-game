@@ -37,8 +37,8 @@ def main():
     while True:
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
         print(f"You have travelled {km_flown} km in {day} day(s).\n")
-        if day-last_move_day>3:
-            print("You feel that the suspect changed places")
+        if day-last_move_day >= 5:
+            print("You see on the tracker that the suspect changed places")
             enemy_airport = random.choice(all_airports)
             last_move_day = day
         day += 1
@@ -58,12 +58,14 @@ def main():
         input('Press enter to continue')
         if current == enemy_airport:
             z=input('\n[1] Fly to another airport \n[2] Stay at this airport \n[3] try to guess who the spy is at this airport \nWhat do you want to do: ')
+            z = Usualsuspects.numerochecker(z, 3)
         else:
             z = input('\n[1] Fly to another airport \n[2] Stay at this airport  \nWhat do you want to do: ')
-        z=Usualsuspects.numerochecker(z,3)
+            z = Usualsuspects.numerochecker(z, 2)
         if z == 3 and current == enemy_airport :
             print("You see the following people...\nWho is the thief?\n")
             enemy_index = random.randint(0, 9)
+            last_move_day=day
             for i in range(10):
                 if i == enemy_index:
                     print(f"{[i + 1]} {describe_person(suspect)}")
