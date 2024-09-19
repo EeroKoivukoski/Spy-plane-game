@@ -31,12 +31,16 @@ def main():
     # Muuttujat
     km_flown = 0
     day = 0
+    last_move_day = 0
 
     # Main loop
     while True:
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
         print(f"You have travelled {km_flown} km in {day} day(s).\n")
-
+        if day-last_move_day>3:
+            print("You feel that the suspect changed places")
+            enemy_airport = random.choice(all_airports)
+            last_move_day = day
         day += 1
 
         # Aloita minipeli
