@@ -13,8 +13,8 @@ def numerochecker(y,z):
                     return y
         y=input("Enter the input: ")
 
-def minipeli():
-    x = random.randint(1, 6)
+def minipeli(country):
+    x = random.randint(1, 8)
     # Esimerkki
     if x == 1:
         print("""
@@ -60,7 +60,6 @@ One of the goons whispers to the other "hey, isn't that the guy we're supposed t
 ''')
         y = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (Yes=1/No=2): ')
         y = numerochecker(y,2)
-        y = int(y)
         if y == 1:
             z = random.randint(1, 2)
             if z == 1:
@@ -80,7 +79,6 @@ You have to walk past them to get to the seats.
 ''')
         y=input('Do you want to ignore the advertisers Yes=1/No=2')
         y = numerochecker(y, 2)
-        y = int(y)
         if y == 1:
             print("You ignored the workers despite the advertisers best attempts.")
             return 1
@@ -126,3 +124,60 @@ You decide to ask them about the spy you're tracking and
 they do not find him and you leave the stand with a grin on your face.
 ''')
                 return 1
+    elif x == 7:
+        print('''
+You are walking at the airport and you feel that the world is against you
+        ''')
+        y = input('Do you want to fight the airport Yes=1/No=2')
+        y = numerochecker(y,2)
+        if y == 1:
+            print('You fight the airport')
+            return 3
+        if y == 2:
+            print('you do not fight the airport')
+            return 1
+    #trivia
+    elif x == 8:
+        if country == "Finland":
+            y=input("What is the capital of Finland?: ")
+            if y == "Helsinki":
+                print("Correct!")
+                return 4
+            else:
+                print("WRONG!")
+                return 3
+        elif country == "France":
+            y=input("What is the capital of France?: ")
+            if y == "Paris":
+                print("Correct!")
+                return 4
+            else:
+                print("WRONG!")
+                return 3
+        elif country == "Germany":
+            y=input("What is the capital of Germany?: ")
+            if y == "Berlin":
+                print("Correct!")
+                return 4
+            else:
+                print("WRONG!")
+                return 3
+        elif country == "Italy":
+            y=input("What is the capital of Italy?: ")
+            if y == "Rome":
+                print("Correct!")
+                return 4
+            else:
+                print("WRONG!")
+                return 3
+        elif country == "Spain":
+            y=input("What is the capital of Spain?: ")
+            if y == "Madrid":
+                print("Correct!")
+                return 4
+            else:
+                print("WRONG!")
+                return 3
+        else:
+            y=minipeli(country)
+            return y

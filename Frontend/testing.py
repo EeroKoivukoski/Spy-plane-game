@@ -44,7 +44,7 @@ def main():
         day += 1
 
         # Aloita minipeli
-        voitto = Usualsuspects.minipeli()
+        voitto = Usualsuspects.minipeli(current['country'])
         if voitto == 1:
             print("You gained nothing.")
         elif voitto == 2:
@@ -121,7 +121,7 @@ def main():
             km_flown += calculate_distance(current, closest[selection])
             current = closest[selection]
         elif z == 2:
-            voitto = Usualsuspects.minipeli()
+            voitto = Usualsuspects.minipeli(current['country'])
             if voitto == 1:
                 print("You gained nothing.")
             elif voitto == 2:
@@ -134,11 +134,6 @@ def main():
                 day -= 1
             day += 1
             input('Press enter to continue')
-
-
-
-# Eero: tähän funktioon tulee satunnaisten tapahtumien koodi jotka tapahtuvat jokaisen lennon jälkeen
-
 
 
 def get_closest_airports(current, count):
@@ -227,12 +222,6 @@ def navigation(current, target):
         longitude_out = f"{longitude_dist} km west"
 
     return f"Your target is {latitude_out} and {longitude_out} of you."
-
-def guess_who():
-
-    print(f"THIEF: {describe_person(enemy)}\n")
-
-
 
 
 def generate_person():
