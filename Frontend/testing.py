@@ -2,7 +2,7 @@ import random
 import mysql.connector
 from geopy import distance
 import tietokantatunnukset
-from Usualsuspects import numerochecker
+import Usualsuspects
 
 #asenna python packaget geopy, mysql-connector-python 8.0.29
 
@@ -38,12 +38,17 @@ def main():
         day += 1
 
         # Aloita minipeli
-        voitto = minipeli(random.randint(1,5))
-        if voitto == 2:
+        voitto = Usualsuspects.minipeli()
+        if voitto == 1:
+            print("You gained nothing.")
+        elif voitto == 2:
             print("You gained a clue!")
         elif voitto == 3:
             print("You wasted a day!")
             day+=1
+        elif voitto == 4:
+            print("You travel fast!(save a day.)")
+            day-=1
 
         input("\nPress Enter to continue...\n")
 
@@ -66,7 +71,6 @@ def main():
             i += 1
 
         # Valitse ja päivitä tämänhetkinen kenttä & kilometrit
-        # Eero: Nyt jos kirjoittaa kirjaimen se kysyy uudelleen numeroa
         while True:
             selection = input("\nEnter a number to continue: ")
             try:
@@ -87,52 +91,7 @@ def main():
 
 
 # Eero: tähän funktioon tulee satunnaisten tapahtumien koodi jotka tapahtuvat jokaisen lennon jälkeen
-def minipeli(x):
-    # Esimerkki
-    if x == 1:
-        print("Tämä toiminto ei ole vielä valmis mutta olisi helppo ja mukava tapa tehdä pelistä kiinnostavampi.")
-        return 1
-    # HQ saa selville ulkonäön osan
-    elif x == 2:
-        print("HQ calls you and tells you that they found new data on the suspect.")
-        return 2
-    # Ruokaika
-    elif x == 3:
-        print("You eat at the airport.")
-        return 1
-    # Hukkunut lippu
-    elif x == 4:
-        print("You accidentally drop your ticket.")
-        y = input("Do you stay a day to find your ticket? (1/2): ")
-        y = numerochecker(y,2)
-        if y == 1:
-            print("You stay to search for it")
-            return 3
-        else:
-            print("You leave the airport thinking about your dear lost ticket :(.")
-            return 1
-    # Tappelu konnien kanssa
-    elif x == 5:
-        print('''
-You are moving through the airport until you come accross three intimidating fellows.
-One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
 
-You have two choices, either run or fight.
-            ''')
-        y = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (input 1/2): ')
-        y = numerochecker(y,2)
-        y = int(y)
-        if y == 1:
-            z = random.randint(1, 2)
-            if z == 1:
-                print("You win the fight and interrogate the goons!")
-                return 2
-            else:
-                print("You lose to the goons and have to waste a day resting.")
-                return 3
-        else:
-            print("You successfully run away!")
-            return 1
 
 
 def get_closest_airports(current, count):
