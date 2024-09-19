@@ -27,7 +27,7 @@ The thought passes and you continue about your day.
     elif x == 2:
         print("""
 You get a call from HQ 
-the call is you and tells you that they found new data on the suspect.
+The Call is from your boss who tells you that they found new data on the suspect.
         """)
         return 2
     # Ruokaika
