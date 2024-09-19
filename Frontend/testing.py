@@ -39,11 +39,16 @@ def main():
 
         # Aloita minipeli
         voitto = Usualsuspects.minipeli()
-        if voitto == 2:
+        if voitto == 1:
+            print("You gained nothing.")
+        elif voitto == 2:
             print("You gained a clue!")
         elif voitto == 3:
             print("You wasted a day!")
             day+=1
+        elif voitto == 4:
+            print("You travel fast!(save a day.)")
+            day-=1
 
         input("\nPress Enter to continue...\n")
 
@@ -66,7 +71,6 @@ def main():
             i += 1
 
         # Valitse ja päivitä tämänhetkinen kenttä & kilometrit
-        # Eero: Nyt jos kirjoittaa kirjaimen se kysyy uudelleen numeroa
         while True:
             selection = input("\nEnter a number to continue: ")
             try:
