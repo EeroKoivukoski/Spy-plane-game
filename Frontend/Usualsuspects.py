@@ -153,7 +153,7 @@ You are walking at the airport and you feel that the world is against you
         if schizo == 1:
             print('You fight the airport')
             return 3
-        if schizo == 2:
+        else:
             print('you do not fight the airport')
             return 1
     #trivia
