@@ -32,6 +32,7 @@ def main():
     km_flown = 0
     day = 0
     last_move_day = 0
+    clues = 0
 
     # Main loop
     while True:
@@ -44,18 +45,12 @@ def main():
         day += 1
 
         # Aloita minipeli
-        voitto = Usualsuspects.minipeli(current['country'])
-        if voitto == 1:
-            print("You gained nothing.")
-        elif voitto == 2:
-            print("You gained a clue!")
-        elif voitto == 3:
-            print("You wasted a day!")
-            day+=1
-        elif voitto == 4:
-            print("You travel fast!(save a day.)")
-            day-=1
-        input('Press enter to continue')
+        z=int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
+        if z == 2:
+            clues = 1
+        if z == 1 or z == -1:
+            day = day + z
+        input('\nPress enter to continue')
         if current == enemy_airport:
             z=input('\n[1] Fly to another airport \n[2] Stay at this airport \n[3] try to guess who the spy is at this airport \nWhat do you want to do: ')
             z = Usualsuspects.numerochecker(z, 3)
@@ -121,19 +116,12 @@ def main():
             km_flown += calculate_distance(current, closest[selection])
             current = closest[selection]
         elif z == 2:
-            voitto = Usualsuspects.minipeli(current['country'])
-            if voitto == 1:
-                print("You gained nothing.")
-            elif voitto == 2:
-                print("You gained a clue!")
-            elif voitto == 3:
-                print("You wasted a day!")
-                day += 1
-            elif voitto == 4:
-                print("You travel fast!(save a day.)")
-                day -= 1
-            day += 1
-            input('Press enter to continue')
+            z = int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
+            if z == 2:
+                clues = 1
+            if z == 1 or z == -1:
+                day = day + z
+            input('\nPress enter to continue')
 
 
 def get_closest_airports(current, count):
