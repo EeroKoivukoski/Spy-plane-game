@@ -21,6 +21,8 @@ enemy = {}
 
 def main():
     all_airports = get_airports()
+    #Rosvon ulkonäkö
+    suspect = generate_person()
 
     # Pelaaja ja rosvo random kentillä (todo: varmista että rosvo tarpeeksi kaukana pelaajasta)
     current = random.choice(all_airports)
@@ -29,69 +31,97 @@ def main():
     # Muuttujat
     km_flown = 0
     day = 0
+    last_move_day = 0
+    clues = 0
 
     # Main loop
     while True:
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
         print(f"You have travelled {km_flown} km in {day} day(s).\n")
-
+        if day-last_move_day >= 5:
+            print("You see on the tracker that the suspect changed places")
+            enemy_airport = random.choice(all_airports)
+            last_move_day = day
         day += 1
 
         # Aloita minipeli
-        voitto = Usualsuspects.minipeli()
-        if voitto == 1:
-            print("You gained nothing.")
-        elif voitto == 2:
-            print("You gained a clue!")
-        elif voitto == 3:
-            print("You wasted a day!")
-            day+=1
-        elif voitto == 4:
-            print("You travel fast!(save a day.)")
-            day-=1
+        z=int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
+        if z == 2:
+            clues = 1
+        if z == 1 or z == -1:
+            day = day + z
+        input('\nPress enter to continue')
+        if current == enemy_airport:
+            z=input('\n[1] Fly to another airport \n[2] Stay at this airport \n[3] try to guess who the spy is at this airport \nWhat do you want to do: ')
+            z = Usualsuspects.numerochecker(z, 3)
+        else:
+            z = input('\n[1] Fly to another airport \n[2] Stay at this airport  \nWhat do you want to do: ')
+            z = Usualsuspects.numerochecker(z, 2)
+        if z == 3 and current == enemy_airport :
+            print("You see the following people...\nWho is the thief?\n")
+            enemy_index = random.randint(0, 9)
+            last_move_day=day
+            for i in range(10):
+                if i == enemy_index:
+                    print(f"{[i + 1]} {describe_person(suspect)}")
+                else:
+                    npc = generate_person()
+                    while npc == suspect:
+                        npc = generate_person()
+                    print(f"[{i + 1}] {describe_person(npc)}")
 
-        input("\nPress Enter to continue...\n")
-
-        print("Where would you like to fly next?")
-        print(f"You are currently at {current['name']} in {current['country']}.")
-        # Navigaatiosysteemi kokeilun vuoksi - ei pakko käyttää
-        print(f"{navigation(current, enemy_airport)}\n")
-
-        # Hae 10 lähintä lentokenttää listaan
-        # TODO: fiksumpi tapa tehdä tämä, näin voi jäädä kenttiä pois tai jumiin
-        closest = get_closest_airports(current, 15)
-        #closest = get_airports_radius(current, 500)
-
-        # Loop lähimpien kenttien läpi
-        i = 1
-        for airport in closest:
-            # Tulosta kentän tiedot
-            dist = calculate_distance(current, airport)
-            print(f"[{i}] {airport['name']} ({airport['country']}) (Distance: {dist} km)")
-            i += 1
-
-        # Valitse ja päivitä tämänhetkinen kenttä & kilometrit
-        while True:
-            selection = input("\nEnter a number to continue: ")
-            try:
-                closest[int(selection) - 1]
-            except ValueError:
-                print("That's not a number!")
-            except IndexError:
-                print("That's not a valid number!")
+            selection = int(input("\nEnter a number to arrest a person: ")) - 1
+            if selection == enemy_index:
+                print("You arrested the thief! You win!")
+                exit()
             else:
-                selection = int(selection)-1
-                if selection < 0:
+                print("You arrested an innocent person. The spy hears about it and moves to another airport.")
+                enemy_airport = random.choice(all_airports)
+
+        elif z == 1:
+            print("Where would you like to fly next?")
+            print(f"You are currently at {current['name']} in {current['country']}.")
+            # Navigaatiosysteemi kokeilun vuoksi - ei pakko käyttää
+            print(f"{navigation(current, enemy_airport)}\n")
+
+            # Hae 10 lähintä lentokenttää listaan
+            # TODO: fiksumpi tapa tehdä tämä, näin voi jäädä kenttiä pois tai jumiin
+            closest = get_closest_airports(current, 15)
+            #closest = get_airports_radius(current, 500)
+
+            # Loop lähimpien kenttien läpi
+            i = 1
+            for airport in closest:
+                # Tulosta kentän tiedot
+                dist = calculate_distance(current, airport)
+                print(f"[{i}] {airport['name']} ({airport['country']}) (Distance: {dist} km)")
+                i += 1
+
+            # Valitse ja päivitä tämänhetkinen kenttä & kilometrit
+            while True:
+                selection = input("\nEnter a number to continue: ")
+                try:
+                    closest[int(selection) - 1]
+                except ValueError:
+                    print("That's not a number!")
+                except IndexError:
                     print("That's not a valid number!")
                 else:
-                    break
+                    selection = int(selection)-1
+                    if selection < 0:
+                        print("That's not a valid number!")
+                    else:
+                        break
 
-        km_flown += calculate_distance(current, closest[selection])
-        current = closest[selection]
-
-
-# Eero: tähän funktioon tulee satunnaisten tapahtumien koodi jotka tapahtuvat jokaisen lennon jälkeen
-
+            km_flown += calculate_distance(current, closest[selection])
+            current = closest[selection]
+        elif z == 2:
+            z = int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
+            if z == 2:
+                clues = 1
+            if z == 1 or z == -1:
+                day = day + z
+            input('\nPress enter to continue')
 
 
 def get_closest_airports(current, count):
@@ -181,5 +211,47 @@ def navigation(current, target):
 
     return f"Your target is {latitude_out} and {longitude_out} of you."
 
+
+def generate_person():
+    features = {
+        "height":
+            ["Short",
+             "Average height",
+             "Tall"],
+        "age":
+            ["young",
+             "adult",
+             "middle-aged",
+             "old"],
+        "gender":
+            ["man",
+             "woman"],
+        "head":
+            ["blonde hair",
+             "dark hair",
+             "long hair",
+             "a bald head",
+             "a baseball cap",
+             "sunglasses",
+             "headphones",
+             "a clearly fake moustache"],
+        "clothes":
+            ["a hawaiian shirt",
+             "a suit",
+             "a dress",
+             "a hoodie",
+             "a denim jacket",
+             "sweatpants",
+             "student overalls"]
+    }
+
+    person = {}
+    for feature in features:
+        person[feature] = random.choice(features[feature])
+
+    return person
+
+def describe_person(p):
+    return f"{p['height']} {p['age']} {p['gender']} with {p['head']} and {p['clothes']}"
 
 main()
