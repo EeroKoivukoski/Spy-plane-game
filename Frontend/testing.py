@@ -28,6 +28,9 @@ def main():
     current = random.choice(all_airports)
     enemy_airport = random.choice(all_airports)
 
+    #Traits
+    madness=0
+
     # Muuttujat
     km_flown = 0
     day = 0
@@ -52,7 +55,7 @@ def main():
         # Aloita minipeli
         #z = int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
 
-        minipelitulos = Usualsuspects.minipeli(current['country'])
+        minipelitulos = Usualsuspects.minipeli(current['country'], madness)
 
         if minipelitulos == 2:
             print_clue(suspect, given_clues)
@@ -64,6 +67,9 @@ def main():
             day -= 1
         elif minipelitulos == 1:
             print("Nothing happens.")
+        elif minipelitulos == 5:
+            print('You gqained the trait "Mad"')
+            madness = 1
 
         # if z == 2:
         #     clues = 1
@@ -117,7 +123,7 @@ def main():
             km_flown += calculate_distance(current, closest[selection])
             current = closest[selection]
         elif z == 2:
-            minipelitulos = Usualsuspects.minipeli(current['country'])
+            minipelitulos = Usualsuspects.minipeli(current['country'],madness)
             if minipelitulos == 2:
                 print_clue(suspect, given_clues)
             elif minipelitulos == 3:
@@ -128,6 +134,9 @@ def main():
                 day -= 1
             elif minipelitulos == 1:
                 print("Nothing happens.")
+            elif minipelitulos == 5:
+                print('You gained the trait "Mad"')
+                madness = 1
             input('\nPress enter to continue')
         elif z == 3 and current == enemy_airport:
             print("You see the following people...\nWho is the thief?\n")

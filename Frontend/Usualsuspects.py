@@ -15,17 +15,16 @@ def numerochecker(y,z):
         y=input("Enter the input: ")
 
 
-def minipeli(country):
+def minipeli(country,madness):
     valinta = random.randint(1, 8)
     # Esimerkki
-    if valinta == 1:
+    if valinta == 1 and madness == 1:
+        print("Hoes mad")
+    elif valinta == 1:
         print("""
-Esimerkki Esimerkki Esimerkki Esimerkki Esimerkki Esimerkki Esimerkki Esimerkki Esimerkki Esimerkki...
-
-You dont know why you're thinking example in finnish.
-The thought passes and you continue about your day.
+You hit your head.
 """)
-        return 1
+        return 5
     # HQ saa selville ulkonäön osan
     elif valinta == 2:
         print("""
@@ -213,7 +212,7 @@ You are walking at the airport and you feel that the world is against you.
                 print("WRONG!")
                 return 3
         else:
-            noneofthesegoddamncountries = minipeli(country)
+            noneofthesegoddamncountries = minipeli(country,madness)
             return noneofthesegoddamncountries
 
     elif valinta == 10:
