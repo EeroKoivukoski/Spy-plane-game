@@ -19,11 +19,19 @@ def minipeli(country,madness):
     valinta = random.randint(1, 10)
     # Esimerkki
     if valinta == 1 and madness == 1:
-        print("Hoes mad")
+        print("You imagine yourself going back in time. Your madness becomes reality. ")
+        return 4
     elif valinta == 1:
-        print("""
-You hit your head.
+        mielentila = input(f""""[1] Fight\n[2] Accept\n\nThe walls are closing in. 
+Do you fight back or accept the new reality? """)
+        mielentila = numerochecker(mielentila, 2)
+        if mielentila == 1:
+            print("""
+You shake your head and the world seems normal again. 
 """)
+            return 1
+        if mielentila == 2:
+            print("You hit your head against a wall until it goes numb. ")
         return 5
     # HQ saa selville ulkonäön osan
     elif valinta == 2:
@@ -326,6 +334,7 @@ You wasted a day due to your cancelled flight.
             if nextflightlaskuri == 2:
                 print("You waste the day at the airport. ")
                 return 3
+
 
 
 
