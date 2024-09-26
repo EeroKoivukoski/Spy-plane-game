@@ -299,11 +299,11 @@ Your gut feels off. You suspect that the food you just ate was spoiled.
 [1] Fly
 [2] Don't fly
 """)
-        poopypants = input("Do you risk the flight?: ")
-        poopypants = numerochecker(poopypants,2)
-        if poopypants == 1:
-            tragdialaskuri = random.randint(1,3)
-            if tragdialaskuri == 1:
+        vessavalinta = input("Do you risk the flight?: ")
+        vessavalinta = numerochecker(vessavalinta,2)
+        if vessavalinta == 1:
+            tragedialaskuri = random.randint(1,3)
+            if tragedialaskuri == 1:
                 print("""
 You lay waste on the plane. Your sewage was potent enough to cancel the flight. 
 The airport staff never found out it was you but they will remember. 
@@ -313,7 +313,7 @@ You wasted a day due to your cancelled flight.
             else:
                 print("You survived the flight. ")
                 return 1
-        elif poopypants != 1:
+        elif vessavalinta != 1:
             nextflightlaskuri = random.randint(1,2)
             if nextflightlaskuri == 1:
                 print("Luckily you were able to get on the next flight and only lost a few hours! ")
