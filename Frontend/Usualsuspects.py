@@ -44,7 +44,7 @@ You ate at the airport like normal.
 While walking through the airport like normal, you noctice that your ticket is missing.
 You probably accidentally dropped your ticket.
 """)
-        choice = input("Do you stay a day to find your ticket? (Yes=1/No=2): ")
+        choice = input(f"[1] Yes\n[2] No\n\nDo you stay a day to find your ticket?")
         choice = numerochecker(choice,2)
         if choice == 1:
             z=random.randint(1,10)
@@ -57,8 +57,12 @@ You find your ticket under a bench. You noctice that under the bench next to you
 which says "You dont know me. But i know who you are searching for". Then the ticket details a deal 
 between you and the messager. The deal is you drop off a file under a bridge nearby then after that 
 you will get a location where info of the suspect is hidden.
- 
-Do you want the make a deal.(Yes=1/No=2): """)
+
+[1] Yes
+[2] No
+
+Do you want the make a deal.:
+ """)
                 if choiceinfo == 1:
                     rng=random.randint(1,10)
                     if rng < 7:
@@ -77,8 +81,11 @@ Do you want the make a deal.(Yes=1/No=2): """)
         print('''
 You are moving through the airport until you come accross three intimidating fellows.
 One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
+
+[1] Fight (50% reward, 50% penalty)
+[2] Run(100% success)
 ''')
-        choice = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (Yes=1/No=2): ')
+        choice = input('Do you want to fight the goons?: ')
         choice = numerochecker(choice,2)
         if choice == 1:
             tappelu = random.randint(1, 10)
@@ -96,8 +103,11 @@ One of the goons whispers to the other "hey, isn't that the guy we're supposed t
         print('''
 While moving through the airport, you spot a advertisement stand.
 You have to walk past them to get to the seats.
+
+[1] Try to iqnore them and walk past em'
+[2] Talk with the advertisers?
 ''')
-        choice=input('Do you want to ignore the advertisers Yes=1/No=2')
+        choice=input('Do you want to ignore the advertisers')
         choice = numerochecker(choice, 2)
         if choice == 1:
             print("You ignored the workers despite the advertisers best attempts.")
@@ -146,9 +156,11 @@ they do not find him and you leave the stand with a grin on your face.
                 return 1
     elif valinta == 7:
         print('''
-You are walking at the airport and you feel that the world is against you
+You are walking at the airport and you feel that the world is against you.
+[1] Fight
+[2] What?
         ''')
-        schizo = input('Do you want to fight the airport Yes=1/No=2: ')
+        schizo = input('Do you want to fight the airport: ')
         schizo = numerochecker(schizo,2)
         if schizo == 1:
             print('You fight the airport')
