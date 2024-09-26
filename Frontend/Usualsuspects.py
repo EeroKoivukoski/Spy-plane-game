@@ -65,7 +65,7 @@ Do you want the make a deal.(Yes=1/No=2): """)
                         print("You hide the file under the bridge but never get an answer.")
                         return 3
                     if rng > 6:
-                        print("You hide the file under the bridge..... and get the location of the info!")
+                        print("You hide the file under the bridge... and get the location of the info!")
                         return 4
                 if choiceinfo == 2:
                     print("You leave the airport thinking about what could have been")
@@ -215,3 +215,6 @@ def minipelitulos(z):
     elif z == 4:
         print("You travel fast!(save a day.)")
         return -1
+
+    if valinta == 10:
+        print("")
