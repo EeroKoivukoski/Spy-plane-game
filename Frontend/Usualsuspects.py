@@ -43,10 +43,10 @@ You ate at the airport like normal.
     # Hukkunut lippu
     elif valinta == 4:
         print("""
-While walking through the airport like normal, you noctice that your ticket is missing.
+While walking through the airport like normal, you notice that your ticket is missing.
 You probably accidentally dropped your ticket.
 """)
-        choice = input("Do you stay a day to find your ticket? (Yes=1/No=2): ")
+        choice = input(f"[1] Yes\n[2] No\n\nDo you stay a day to find your ticket?")
         choice = numerochecker(choice,2)
         if choice == 1:
             z=random.randint(1,10)
@@ -55,19 +55,23 @@ You probably accidentally dropped your ticket.
                 return 3
             if z > 6:
                 choiceinfo=input("""
-You find your ticket under a bench. You noctice that under the bench next to your ticket is a message
-which says "You dont know me. But i know who you are searching for". Then the ticket details a deal 
+You find your ticket under a bench. You notice that under the bench next to your ticket is a message
+which says "You dont know me. But I know who you are searching for". Then the ticket details a deal 
 between you and the messager. The deal is you drop off a file under a bridge nearby then after that 
 you will get a location where info of the suspect is hidden.
- 
-Do you want the make a deal.(Yes=1/No=2): """)
+
+[1] Yes
+[2] No
+
+Do you want the make a deal.:
+ """)
                 if choiceinfo == 1:
                     rng=random.randint(1,10)
                     if rng < 7:
                         print("You hide the file under the bridge but never get an answer.")
                         return 3
                     if rng > 6:
-                        print("You hide the file under the bridge..... and get the location of the info!")
+                        print("You hide the file under the bridge... and get the location of the info!")
                         return 4
                 if choiceinfo == 2:
                     print("You leave the airport thinking about what could have been")
@@ -79,8 +83,11 @@ Do you want the make a deal.(Yes=1/No=2): """)
         print('''
 You are moving through the airport until you come accross three intimidating fellows.
 One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
+
+[1] Fight (50% reward, 50% penalty)
+[2] Run(100% success)
 ''')
-        choice = input('Do you want to fight the goons(50% reward, 50% penalty) or run (100% success)? (Yes=1/No=2): ')
+        choice = input('Do you want to fight the goons?: ')
         choice = numerochecker(choice,2)
         if choice == 1:
             tappelu = random.randint(1, 10)
@@ -98,8 +105,11 @@ One of the goons whispers to the other "hey, isn't that the guy we're supposed t
         print('''
 While moving through the airport, you spot a advertisement stand.
 You have to walk past them to get to the seats.
+
+[1] Try to iqnore them and walk past em'
+[2] Talk with the advertisers?
 ''')
-        choice=input('Do you want to ignore the advertisers Yes=1/No=2')
+        choice=input('Do you want to ignore the advertisers')
         choice = numerochecker(choice, 2)
         if choice == 1:
             print("You ignored the workers despite the advertisers best attempts.")
@@ -148,9 +158,11 @@ they do not find him and you leave the stand with a grin on your face.
                 return 1
     elif valinta == 7:
         print('''
-You are walking at the airport and you feel that the world is against you
+You are walking at the airport and you feel that the world is against you.
+[1] Fight
+[2] What?
         ''')
-        schizo = input('Do you want to fight the airport Yes=1/No=2: ')
+        schizo = input('Do you want to fight the airport: ')
         schizo = numerochecker(schizo,2)
         if schizo == 1:
             print('You fight the airport')
@@ -201,8 +213,45 @@ You are walking at the airport and you feel that the world is against you
                 print("WRONG!")
                 return 3
         else:
-            noneofthesegoddamncountries=minipeli(country)
+            noneofthesegoddamncountries = minipeli(country)
             return noneofthesegoddamncountries
+
+    elif valinta == 10:
+        print("""
+Your gut feels off. You suspect that the food you just ate was spoiled. 
+
+[1] Fly
+[2] Don't fly
+""")
+        poopypants = input("Do you risk the flight?: ")
+        poopypants = numerochecker(poopypants,2)
+        if poopypants == 1:
+            tragdialaskuri = random.randint(1,3)
+            if tragdialaskuri == 1:
+                print("""
+You lay waste on the plane. Your sewage was potent enough to cancel the flight. 
+The airport staff never found out it was you but they will remember. 
+You wasted a day due to your cancelled flight
+""")
+                return 3
+            else:
+                print("You survived the flight. ")
+                return 1
+        elif poopypants != 1:
+            nextflightlaskuri = random.randint(1,2)
+            if nextflightlaskuri == 1:
+                print("Luckily you were able to get on the next flight and only lost a few hours! ")
+                extraclue = random.randint(1,7)
+                if extraclue > 1:
+                    return 1
+                if extraclue == 1:
+                    print("You got a tip of your target from an unknown source. ")
+                    return 2
+            if nextflightlaskuri == 2:
+                print("You waste the day at the airport. ")
+                return 3
+
+
 
 def minipelitulos(z):
     if z == 1:
@@ -217,3 +266,5 @@ def minipelitulos(z):
     elif z == 4:
         print("You travel fast!(save a day.)")
         return -1
+
+
