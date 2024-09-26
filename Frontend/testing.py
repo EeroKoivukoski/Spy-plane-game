@@ -34,15 +34,19 @@ def main():
     last_move_day = 0
     # clues = 0
     given_clues = []
+    max_days = 30
 
     # Main loop
     while True:
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
         print(f"You have travelled {km_flown} km in {day} day(s).\n")
-        if day-last_move_day >= 5:
+        print(f"You have {max_days - day} days left.")
+
+        if day - last_move_day >= 5:
             print("You see on the tracker that the suspect changed places")
             enemy_airport = random.choice(all_airports)
             last_move_day = day
+
         day += 1
 
         # Aloita minipeli
@@ -196,13 +200,13 @@ def get_airports():
     return airports
 
 
-# Hae tietokannasta maan nimi ISO-koodin perusteella
-def get_country_by_code(iso):
-    sql = f'select name from country where iso_country = "{iso}"'
-    cursor = connection.cursor()
-    cursor.execute(sql)
-    result = cursor.fetchall()
-    return result[0][0]
+# # Hae tietokannasta maan nimi ISO-koodin perusteella
+# def get_country_by_code(iso):
+#     sql = f'select name from country where iso_country = "{iso}"'
+#     cursor = connection.cursor()
+#     cursor.execute(sql)
+#     result = cursor.fetchall()
+#     return result[0][0]
 
 
 def navigation(current, target):
