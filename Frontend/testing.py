@@ -28,6 +28,9 @@ def main():
     current = random.choice(all_airports)
     enemy_airport = random.choice(all_airports)
 
+    #Traits
+    madness=0
+
     # Muuttujat
     km_flown = 0
     day = 0
@@ -52,7 +55,7 @@ def main():
         # Aloita minipeli
         #z = int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
 
-        minipelitulos = Usualsuspects.minipeli(current['country'])
+        minipelitulos = Usualsuspects.minipeli(current['country'], madness)
 
         if minipelitulos == 2:
             print_clue(suspect, given_clues)
@@ -64,6 +67,9 @@ def main():
             day -= 1
         elif minipelitulos == 1:
             print("Nothing happens.")
+        elif minipelitulos == 5:
+            print('You gqained the trait "Mad"')
+            madness = 1
 
         # if z == 2:
         #     clues = 1
@@ -79,28 +85,7 @@ def main():
             z = input('\n[1] Fly to another airport \n[2] Stay at this airport  \nWhat do you want to do: ')
             z = Usualsuspects.numerochecker(z, 2)
 
-        if z == 3 and current == enemy_airport:
-            print("You see the following people...\nWho is the thief?\n")
-            enemy_index = random.randint(0, 9)
-            last_move_day=day
-            for i in range(10):
-                if i == enemy_index:
-                    print(f"{[i + 1]} {describe_person(suspect)}")
-                else:
-                    npc = generate_person()
-                    while npc == suspect:
-                        npc = generate_person()
-                    print(f"[{i + 1}] {describe_person(npc)}")
-
-            selection = int(input("\nEnter a number to arrest a person: ")) - 1
-            if selection == enemy_index:
-                print("You arrested the thief! You win!")
-                exit()
-            else:
-                print("You arrested an innocent person. The spy hears about it and moves to another airport.")
-                enemy_airport = random.choice(all_airports)
-
-        elif z == 1:
+        if z == 1:
             print("Where would you like to fly next?")
             print(f"You are currently at {current['name']} in {current['country']}.")
             # Navigaatiosysteemi kokeilun vuoksi - ei pakko käyttää
@@ -138,12 +123,41 @@ def main():
             km_flown += calculate_distance(current, closest[selection])
             current = closest[selection]
         elif z == 2:
-            z = int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
-            if z == 2:
-                clues = 1
-            if z == 1 or z == -1:
-                day = day + z
+            minipelitulos = Usualsuspects.minipeli(current['country'],madness)
+            if minipelitulos == 2:
+                print_clue(suspect, given_clues)
+            elif minipelitulos == 3:
+                print("You lost a day!")
+                day += 1
+            elif minipelitulos == 4:
+                print("You travel faster than expected! You gain an extra day.")
+                day -= 1
+            elif minipelitulos == 1:
+                print("Nothing happens.")
+            elif minipelitulos == 5:
+                print('You gained the trait "Mad"')
+                madness = 1
             input('\nPress enter to continue')
+        elif z == 3 and current == enemy_airport:
+            print("You see the following people...\nWho is the thief?\n")
+            enemy_index = random.randint(0, 9)
+            last_move_day=day
+            for i in range(10):
+                if i == enemy_index:
+                    print(f"{[i + 1]} {describe_person(suspect)}")
+                else:
+                    npc = generate_person()
+                    while npc == suspect:
+                        npc = generate_person()
+                    print(f"[{i + 1}] {describe_person(npc)}")
+
+            selection = int(input("\nEnter a number to arrest a person: ")) - 1
+            if selection == enemy_index:
+                print("You arrested the thief! You win!")
+                exit()
+            else:
+                print("You arrested an innocent person. The spy hears about it and moves to another airport.")
+                enemy_airport = random.choice(all_airports)
 
 
 def get_closest_airports(current, count):
