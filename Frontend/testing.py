@@ -52,9 +52,6 @@ def main():
 
         day += 1
 
-        # Aloita minipeli
-        #z = int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
-
         minipelitulos = Usualsuspects.minipeli(current['country'], madness)
 
         if minipelitulos == 2:
@@ -71,21 +68,16 @@ def main():
             print('You gqained the trait "Mad"')
             madness = 1
 
-        # if z == 2:
-        #     clues = 1
-        # if z == 1 or z == -1:
-        #     day = day + z
-
         input('\nPress enter to continue')
 
         if current == enemy_airport:
-            z = input('\n[1] Fly to another airport \n[2] Stay at this airport \n[3] try to guess who the spy is at this airport \nWhat do you want to do: ')
-            z = Usualsuspects.numerochecker(z, 3)
+            eveningoptions = input('\n[1] Fly to another airport \n[2] Stay at this airport \n[3] try to guess who the spy is at this airport \nWhat do you want to do: ')
+            eveningoptions = Usualsuspects.numerochecker(eveningoptions, 3)
         else:
-            z = input('\n[1] Fly to another airport \n[2] Stay at this airport  \nWhat do you want to do: ')
-            z = Usualsuspects.numerochecker(z, 2)
+            eveningoptions = input('\n[1] Fly to another airport \n[2] Stay at this airport  \nWhat do you want to do: ')
+            eveningoptions = Usualsuspects.numerochecker(eveningoptions, 2)
 
-        if z == 1:
+        if eveningoptions == 1:
             print("Where would you like to fly next?")
             print(f"You are currently at {current['name']} in {current['country']}.")
             # Navigaatiosysteemi kokeilun vuoksi - ei pakko käyttää
@@ -122,7 +114,7 @@ def main():
 
             km_flown += calculate_distance(current, closest[selection])
             current = closest[selection]
-        elif z == 2:
+        elif eveningoptions == 2:
             minipelitulos = Usualsuspects.minipeli(current['country'],madness)
             if minipelitulos == 2:
                 print_clue(suspect, given_clues)
@@ -138,7 +130,7 @@ def main():
                 print('You gained the trait "Mad"')
                 madness = 1
             input('\nPress enter to continue')
-        elif z == 3 and current == enemy_airport:
+        elif eveningoptions == 3 and current == enemy_airport:
             print("You see the following people...\nWho is the thief?\n")
             enemy_index = random.randint(0, 9)
             last_move_day=day
