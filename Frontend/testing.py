@@ -32,7 +32,8 @@ def main():
     km_flown = 0
     day = 0
     last_move_day = 0
-    clues = 0
+    # clues = 0
+    given_clues = []
 
     # Main loop
     while True:
@@ -45,20 +46,36 @@ def main():
         day += 1
 
         # Aloita minipeli
-        z = int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
+        #z = int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
 
-        if z == 2:
-            clues = 1
-        if z == 1 or z == -1:
-            day = day + z
+        minipelitulos = Usualsuspects.minipeli(current['country'])
+
+        if minipelitulos == 2:
+            print_clue(suspect, given_clues)
+        elif minipelitulos == 3:
+            print("You lost a day!")
+            day += 1
+        elif minipelitulos == 4:
+            print("You travel faster than expected! You gain an extra day.")
+            day -= 1
+        elif minipelitulos == 1:
+            print("Nothing happens.")
+
+        # if z == 2:
+        #     clues = 1
+        # if z == 1 or z == -1:
+        #     day = day + z
+
         input('\nPress enter to continue')
+
         if current == enemy_airport:
-            z=input('\n[1] Fly to another airport \n[2] Stay at this airport \n[3] try to guess who the spy is at this airport \nWhat do you want to do: ')
+            z = input('\n[1] Fly to another airport \n[2] Stay at this airport \n[3] try to guess who the spy is at this airport \nWhat do you want to do: ')
             z = Usualsuspects.numerochecker(z, 3)
         else:
             z = input('\n[1] Fly to another airport \n[2] Stay at this airport  \nWhat do you want to do: ')
             z = Usualsuspects.numerochecker(z, 2)
-        if z == 3 and current == enemy_airport :
+
+        if z == 3 and current == enemy_airport:
             print("You see the following people...\nWho is the thief?\n")
             enemy_index = random.randint(0, 9)
             last_move_day=day
@@ -158,7 +175,7 @@ def get_airports_radius(current, radius_km):
 # Hakee kaikki lentokentät
 def get_airports():
     # SQL-kysely
-    sql = "select name, latitude_deg, longitude_deg, iso_country from airport where continent='EU' and type='large_airport'"
+    sql = "select airport.name, latitude_deg, longitude_deg, country.name from airport, country where country.iso_country = airport.iso_country and airport.continent='EU' and airport.type='large_airport'"
     cursor = connection.cursor()
     cursor.execute(sql)
     result = cursor.fetchall()
@@ -172,7 +189,7 @@ def get_airports():
             "name": i[0],
             "latitude": i[1],
             "longitude": i[2],
-            "country": get_country_by_code(i[3]),
+            "country": i[3],
         }
         airports.append(airport)
 
@@ -257,8 +274,19 @@ def describe_person(p):
     return f"{p['height']} {p['age']} {p['gender']} with {p['head']} and {p['clothes']}"
 
 
-def print_clue(suspect):
-    feature = random.choice(suspect.keys())
+def print_clue(suspect, given_clues):
+    # Jos annetut vihjeet on tuntomerkkien määrä -> kaikki vihjeet annettu
+    if len(given_clues) == len(suspect.keys()):
+        print("All clues given!")
+        return
+
+    # Valitse random tuntomerkki, tarkista ettei ole jo annettu
+    feature = random.choice(list(suspect.keys()))
+    while feature in given_clues:
+        feature = random.choice(list(suspect.keys()))
+    given_clues.append(feature)
+
+    # Tulosta tuntomerkki
     if feature == "height":
         print(f"The suspect is {suspect[feature]}.")
     elif feature == "age":

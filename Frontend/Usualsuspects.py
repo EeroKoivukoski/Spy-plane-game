@@ -43,7 +43,7 @@ You ate at the airport like normal.
     # Hukkunut lippu
     elif valinta == 4:
         print("""
-While walking through the airport like normal, you noctice that your ticket is missing.
+While walking through the airport like normal, you notice that your ticket is missing.
 You probably accidentally dropped your ticket.
 """)
         choice = input("Do you stay a day to find your ticket? (Yes=1/No=2): ")
@@ -55,8 +55,8 @@ You probably accidentally dropped your ticket.
                 return 3
             if z > 6:
                 choiceinfo=input("""
-You find your ticket under a bench. You noctice that under the bench next to your ticket is a message
-which says "You dont know me. But i know who you are searching for". Then the ticket details a deal 
+You find your ticket under a bench. You notice that under the bench next to your ticket is a message
+which says "You dont know me. But I know who you are searching for". Then the ticket details a deal 
 between you and the messager. The deal is you drop off a file under a bridge nearby then after that 
 you will get a location where info of the suspect is hidden.
  
@@ -201,7 +201,7 @@ You are walking at the airport and you feel that the world is against you
                 print("WRONG!")
                 return 3
         else:
-            noneofthesegoddamncountries=minipeli(country)
+            noneofthesegoddamncountries = minipeli(country)
             return noneofthesegoddamncountries
 
 def minipelitulos(z):
