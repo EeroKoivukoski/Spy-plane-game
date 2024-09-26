@@ -59,6 +59,7 @@ between you and the messager. The deal is you drop off a file under a bridge nea
 you will get a location where info of the suspect is hidden.
  
 Do you want the make a deal.(Yes=1/No=2): """)
+                choiceinfo = numerochecker(choiceinfo, 2)
                 if choiceinfo == 1:
                     rng=random.randint(1,10)
                     if rng < 7:
