@@ -216,6 +216,42 @@ You are walking at the airport and you feel that the world is against you.
             noneofthesegoddamncountries = minipeli(country)
             return noneofthesegoddamncountries
 
+    elif valinta == 10:
+        print("""
+Your gut feels off. You suspect that the food you just ate was spoiled. 
+
+[1] Fly
+[2] Don't fly
+""")
+        poopypants = print(input("Do you risk the flight?: "))
+        if poopypants == 1:
+            tragdialaskuri = random.randint(1,3)
+            if tragdialaskuri == 1:
+                print("""
+You lay waste on the plane. Your sewage was potent enough to cancel the flight. 
+The airport staff never found out it was you but they will remember. 
+You wasted a day due to your cancelled flight
+""")
+                return 3
+            else:
+                print("You survived the flight. ")
+                return 1
+        if poopypants != 1:
+            nextflightlaskuri = random.randint(1,2)
+            if nextflightlaskuri == 1:
+                print("Luckily you were able to get on the next flight and only lost a few hours! ")
+                extraclue = random.randint(1,7)
+                if extraclue > 1:
+                    return 1
+                if extraclue == 1:
+                    print("You got a tip of your target from an unknown source. ")
+                    return 2
+            if nextflightlaskuri == 2:
+                print("You waste the day at the airport. ")
+                return 3
+
+
+
 def minipelitulos(z):
     if z == 1:
         print("You gained nothing.")
@@ -230,5 +266,4 @@ def minipelitulos(z):
         print("You travel fast!(save a day.)")
         return -1
 
-    if valinta == 10:
-        print("")
+
