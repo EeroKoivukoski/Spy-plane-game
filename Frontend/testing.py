@@ -138,11 +138,16 @@ def main():
             km_flown += calculate_distance(current, closest[selection])
             current = closest[selection]
         elif z == 2:
-            z = int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
-            if z == 2:
-                clues = 1
-            if z == 1 or z == -1:
-                day = day + z
+            if minipelitulos == 2:
+                print_clue(suspect, given_clues)
+            elif minipelitulos == 3:
+                print("You lost a day!")
+                day += 1
+            elif minipelitulos == 4:
+                print("You travel faster than expected! You gain an extra day.")
+                day -= 1
+            elif minipelitulos == 1:
+                print("Nothing happens.")
             input('\nPress enter to continue')
 
 
