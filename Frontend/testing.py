@@ -45,7 +45,8 @@ def main():
         day += 1
 
         # Aloita minipeli
-        z=int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
+        z = int(Usualsuspects.minipelitulos(Usualsuspects.minipeli(current['country'])))
+
         if z == 2:
             clues = 1
         if z == 1 or z == -1:
@@ -251,7 +252,25 @@ def generate_person():
 
     return person
 
+
 def describe_person(p):
     return f"{p['height']} {p['age']} {p['gender']} with {p['head']} and {p['clothes']}"
+
+
+def print_clue(suspect):
+    feature = random.choice(suspect.keys())
+    if feature == "height":
+        print(f"The suspect is {suspect[feature]}.")
+    elif feature == "age":
+        print(f"The suspect is {suspect[feature]}.")
+    elif feature == "gender":
+        print(f"The suspect is a {suspect[feature]}.")
+    elif feature == "head":
+        print(f"The suspect has {suspect[feature]}.")
+    elif feature == "clothes":
+        print(f"The suspect is wearing {suspect[feature]}.")
+    else:
+        print("This is supposed to be a clue - something went wrong!")
+
 
 main()

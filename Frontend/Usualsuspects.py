@@ -1,4 +1,5 @@
 import random
+
 def numerochecker(y,z):
    z+=1
    while True:
@@ -12,6 +13,7 @@ def numerochecker(y,z):
                 if y == i:
                     return y
         y=input("Enter the input: ")
+
 
 def minipeli(country):
     valinta = random.randint(1, 8)
