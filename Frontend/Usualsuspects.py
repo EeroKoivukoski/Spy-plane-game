@@ -16,7 +16,7 @@ def numerochecker(y,z):
 
 
 def minipeli(country,madness):
-    valinta = random.randint(1, 8)
+    valinta = random.randint(1, 10)
     # Esimerkki
     if valinta == 1 and madness == 1:
         print("Hoes mad")
@@ -214,6 +214,78 @@ You are walking at the airport and you feel that the world is against you.
         else:
             noneofthesegoddamncountries = minipeli(country,madness)
             return noneofthesegoddamncountries
+
+    elif valinta == 9:
+
+        choice = input('''
+A strange old man with a thick accent asks you for directions. 
+He seems quite nervous..
+Do you help the man, interrogate him or escape the situation?
+
+[1] Help
+[2] Interrogate
+[3] Escape
+
+What do you want to do?: ''')
+        choice = numerochecker(choice, 3)
+        if choice == 1:
+            helpe = random.randint(1, 10)
+            if helpe <= 3:
+                print("The man thanks you and leaves")
+                return 1
+            elif helpe >= 7:
+                print("The man attacks you when you least expect it and leaves you injured")
+                return 3
+            elif 6 >= helpe >= 4:
+                print("The man abruptly hands you a piece of paper that seems important, and leaves")
+                return 2
+        elif choice == 2:
+            intero = random.randint(1, 3)
+            if intero == 1:
+                print('''
+You interrogate a poor old man who barely understands you.
+He's clearly innocent and you make a fool of yourself.
+            ''')
+                return 1
+            elif intero == 2:
+                print('''
+The man calls you a fool and hands you a piece of paper that seems important.
+                    ''')
+                return 2
+            elif intero == 3:
+
+                chase = input('''
+The man instantly recognizes what you're doing and starts running away.
+
+[1] Yes
+[2] No
+
+Do you chase him?: ''')
+                chase = numerochecker(chase, 2)
+                if chase == 1:
+                    chaseresult = random.randint(1, 3)
+                    if chaseresult == 1:
+                        print("You chase the man for a while, but after a lengthy chase you lose sight of him")
+                        return 1
+
+                    elif chaseresult == 2:
+                        print('''
+The old man doesn't stand a chance running away from you, and you catch up to him soon after
+He hands you a piece of paper that seems important, and proves he is there to help you.
+
+                    ''')
+                        return 2
+
+                    elif chaseresult == 3:
+                        print('''
+You chase the old man into an alley full of suspicious individuals who stop you in your tracks.
+Thankfully, they spare all but your phone and wallet.
+
+                    ''')
+                        return 3
+                if choice == 3:
+                    print("You escape from the old man with no problems")
+                    return 1
 
     elif valinta == 10:
         print("""
