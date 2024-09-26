@@ -16,19 +16,22 @@ def numerochecker(y,z):
 
 
 def minipeli(country,madness):
-    valinta = random.randint(1, 10)
+    valinta = random.randint(1, 1)
     # Esimerkki
     if valinta == 1 and madness == 1:
         print("You imagine yourself going back in time. Your madness becomes reality. ")
         return 4
     elif valinta == 1:
-        mielentila = input(f""""[1] Fight\n[2] Accept\n\nThe walls are closing in. 
-Do you fight back or accept the new reality? """)
+        mielentila = input("""
+The walls are closing in. 
+
+[1] Fight
+[2] Accept
+
+Do you fight back or accept the new reality?: """)
         mielentila = numerochecker(mielentila, 2)
         if mielentila == 1:
-            print("""
-You shake your head and the world seems normal again. 
-""")
+            print("You shake your head and the world seems normal again.")
             return 1
         if mielentila == 2:
             print("You hit your head against a wall until it goes numb. ")
@@ -72,6 +75,7 @@ you will get a location where info of the suspect is hidden.
 
 Do you want the make a deal.:
  """)
+                choiceinfo=numerochecker(choiceinfo,2)
                 if choiceinfo == 1:
                     rng=random.randint(1,10)
                     if rng < 7:
@@ -179,7 +183,7 @@ but your violence felt justified. """)
             print("""You fight the airport and break a door despite your decision.
 You waste a day in jail. """)
             return 3
-    elif valinta == 7 and madness != 1:
+    elif valinta == 7:
         print("You feel a sense of unease but carry on.")
         return 1
     #trivia
