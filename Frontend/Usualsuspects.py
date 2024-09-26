@@ -155,7 +155,7 @@ You decide to ask them about the spy you're tracking and
 they do not find him and you leave the stand with a grin on your face.
 ''')
                 return 1
-    elif valinta == 7:
+    elif valinta == 7 and madness == 1:
         print('''
 You are walking at the airport and you feel that the world is against you.
 [1] Fight
@@ -164,11 +164,16 @@ You are walking at the airport and you feel that the world is against you.
         schizo = input('Do you want to fight the airport: ')
         schizo = numerochecker(schizo,2)
         if schizo == 1:
-            print('You fight the airport')
+            print("""You fight the airport and punch a hole through a wall. You got detained 
+but your violence felt justified. """)
             return 3
         else:
-            print('you do not fight the airport')
-            return 1
+            print("""You fight the airport and break a door despite your decision.
+You waste a day in jail. """)
+            return 3
+    elif valinta == 7 and madness != 1:
+        print("You feel a sense of unease but carry on.")
+        return 1
     #trivia
     elif valinta == 8:
         if country == "Finland":
@@ -302,7 +307,7 @@ Your gut feels off. You suspect that the food you just ate was spoiled.
                 print("""
 You lay waste on the plane. Your sewage was potent enough to cancel the flight. 
 The airport staff never found out it was you but they will remember. 
-You wasted a day due to your cancelled flight
+You wasted a day due to your cancelled flight.
 """)
                 return 3
             else:

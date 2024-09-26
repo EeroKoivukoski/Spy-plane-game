@@ -90,7 +90,7 @@ def main():
         elif minipelitulos == 1:
             print("Nothing happens.")
         elif minipelitulos == 5:
-            print('You gqained the trait "Mad"')
+            print('You qained the trait "Mad"')
             madness = 1
 
         input('\nPress enter to continue')
