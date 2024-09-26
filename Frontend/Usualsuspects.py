@@ -16,7 +16,7 @@ def numerochecker(y,z):
 
 
 def minipeli(country,madness):
-    valinta = random.randint(1, 1)
+    valinta = random.randint(1, 10)
     # Esimerkki
     if valinta == 1 and madness == 1:
         print("You imagine yourself going back in time. Your madness becomes reality. ")
