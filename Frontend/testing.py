@@ -170,7 +170,7 @@ def main():
 
             selection = int(input("\nEnter a number to arrest a person: ")) - 1
             if selection == enemy_index:
-                print("You arrested the thief! You win! \nYou won in",day,"Days!")
+                print("You arrested the thief! You win! \nYou won in",day-1,"Days!")
                 exit()
             else:
                 print("You arrested an innocent person. The spy hears about it and moves to another airport.")
