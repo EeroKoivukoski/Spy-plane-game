@@ -49,6 +49,7 @@ The Call is from your boss who tells you that they found new data on the suspect
 You felt quite hungry and chose to go for a bite.
 You ate at the airport like normal.
 """)
+
         return 1
     # Hukkunut lippu
     elif valinta == 4:
