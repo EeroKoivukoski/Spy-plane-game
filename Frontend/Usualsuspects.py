@@ -1,4 +1,4 @@
-import random
+import sys,time,random
 
 def numerochecker(y,z):
    z+=1
@@ -341,8 +341,6 @@ You wasted a day due to your cancelled flight.
                 return 3
 
 
-
-
 def minipelitulos(z):
     if z == 1:
         print("You gained nothing.")
@@ -358,3 +356,14 @@ def minipelitulos(z):
         return -1
 
 
+def person_like_type(t):
+    x=1
+    for l in t:
+        sys.stdout.write(l)
+        sys.stdout.flush()
+        if x == 40:
+            time.sleep((random.random() * 0.5) * 0.0000000000000000001)
+            x=0
+        else:
+            x+=1
+    print('')

@@ -3,7 +3,7 @@ import mysql.connector
 from geopy import distance
 import tietokantatunnukset
 import Usualsuspects
-
+import asci_lib
 #asenna python packaget geopy, mysql-connector-python 8.0.29
 
 connection = mysql.connector.connect(
@@ -39,32 +39,14 @@ def main():
     given_clues = []
     max_days = 30
 
+    #Näyttää intronäytön
+    asci_lib.asci("intro")
+    input("Press enter to start the game")
+
     # Main loop
     while True:
         if max_days <= day:
-            print('''
-
-
-██╗   ██╗ ██████╗ ██╗   ██╗    ███████╗ █████╗ ██╗██╗     ███████╗██████╗ ██╗
-╚██╗ ██╔╝██╔═══██╗██║   ██║    ██╔════╝██╔══██╗██║██║     ██╔════╝██╔══██╗██║
- ╚████╔╝ ██║   ██║██║   ██║    █████╗  ███████║██║██║     █████╗  ██║  ██║██║
-  ╚██╔╝  ██║   ██║██║   ██║    ██╔══╝  ██╔══██║██║██║     ██╔══╝  ██║  ██║╚═╝
-   ██║   ╚██████╔╝╚██████╔╝    ██║     ██║  ██║██║███████╗███████╗██████╔╝██╗
-   ╚═╝    ╚═════╝  ╚═════╝     ╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝╚══════╝╚═════╝ ╚═╝
- ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
-██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
-██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
-██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
-╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
- ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝
-                                                                          
-    ██╗                                                                   
-██╗██╔╝                                                                   
-╚═╝██║                                                                    
-██╗██║                                                                    
-╚═╝╚██╗                                                                   
-    ╚═╝                                                                   
-''')
+            asci_lib.asci("gameover")
             exit()
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
         print(f"You have travelled {km_flown} km in {day} day(s).\n")
