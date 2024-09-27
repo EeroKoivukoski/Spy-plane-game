@@ -31,6 +31,7 @@ def main():
     #Traits
     madness=0
     foodpoisoning=0
+    gun=0
 
     # Muuttujat
     km_flown = 0
@@ -60,7 +61,7 @@ def main():
 
         day += 1
 
-        minipelitulos = Usualsuspects.minipeli(current['country'], madness, foodpoisoning)
+        minipelitulos = Usualsuspects.minipeli(current['country'], madness, foodpoisoning,gun)
         if minipelitulos == 1:
             print("Nothing happens.")
         elif minipelitulos == 2:
@@ -82,6 +83,9 @@ def main():
             day += 1
             print('You lost the trait "Food poisoning".')
             foodpoisoning = 0
+        elif minipelitulos == 8:
+            print("You got a gun.")
+            gun=1
 
 
         input('\nPress enter to continue')
@@ -131,7 +135,7 @@ def main():
             km_flown += calculate_distance(current, closest[selection])
             current = closest[selection]
         elif eveningoptions == 2:
-            minipelitulos = Usualsuspects.minipeli(current['country'],madness,foodpoisoning)
+            minipelitulos = Usualsuspects.minipeli(current['country'],madness,foodpoisoning,gun)
             if minipelitulos == 2:
                 print_clue(suspect, given_clues)
             elif minipelitulos == 3:
@@ -145,6 +149,18 @@ def main():
             elif minipelitulos == 5:
                 print('You gained the trait "Mad"')
                 madness = 1
+            elif minipelitulos == 6:
+                print('You gained the trait "Food poisoning".')
+                foodpoisoning = 1
+            elif minipelitulos == 7:
+                print("You lost a day!")
+                day += 1
+                print('You lost the trait "Food poisoning".')
+                foodpoisoning = 0
+            elif minipelitulos == 8:
+                print("You got a gun.")
+                gun = 1
+
             input('\nPress enter to continue')
         elif eveningoptions == 3 and current == enemy_airport:
             print("You see the following people...\nWho is the thief?\n")
