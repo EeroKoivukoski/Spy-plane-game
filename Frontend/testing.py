@@ -86,6 +86,10 @@ def main():
         elif minipelitulos == 8:
             print("You got a gun.")
             gun=1
+        elif minipelitulos == 9:
+            print("You lost a day but got a clue!")
+            day += 1
+            print_clue(suspect, given_clues)
 
 
         input('\nPress enter to continue')
@@ -160,6 +164,10 @@ def main():
             elif minipelitulos == 8:
                 print("You got a gun.")
                 gun = 1
+            elif minipelitulos == 9:
+                print("You lost a day but got a clue!")
+                day += 1
+                print_clue(suspect, given_clues)
 
             input('\nPress enter to continue')
         elif eveningoptions == 3 and current == enemy_airport:

@@ -18,7 +18,7 @@ def numerochecker(y,z):
 
 
 def minipeli(country,madness,foodpoisoning,gun):
-    valinta = random.randint(10, 10)
+    valinta = random.randint(1, 11)
     # Madness good event(todo: ascii)
     if valinta == 1 and madness == 1:
         print("You imagine yourself going back in time. Your madness becomes reality. ")
@@ -431,3 +431,48 @@ the speed limit.
         else:
                 input("You leave the car alone.")
                 return 1
+
+    elif valinta == 11 and madness == 1:
+        print("The weather report looks stormy.")
+        hullumyrskylentovalinta = input("""
+    the airport PSA says that all flights have been cancelled for the day because of the poor weather conditions.
+    You see an unoccupied plane right outside the exit on the airstrip. You get an idea. 
+
+    [1] Steal the plane!
+    [2] What?!
+    """)
+        hullumyrskylentovalinta = numerochecker(hullumyrskylentovalinta, 2)
+        if hullumyrskylentovalinta == 1:
+            print("""You jump on the plane and pierce the stormy sky.
+    You will do whatever it takes to find your target.""")
+            return 1
+        else:
+            print("""Your sentient body drags your reluctant mind inside the plane.
+    You fly though the thundering skies realizing that your body has a mission of its own""")
+            return 1
+
+
+    elif valinta == 11:
+        print("The weather report looks stormy")
+        myrskylentovalinta = input("""
+    The airport PSA says that all flights have been cancelled for the day because of the poor weather conditions.
+
+    [1] Spend the day piecing together possible clues.
+    [2] Explain the situation airport management hoping for a quick transfer to a nearby airport.""")
+        myrskylentovalinta = numerochecker(myrskylentovalinta, 2)
+        if myrskylentovalinta == 1:
+            lentovihjemahdollisuus = random.randint(1, 6)
+            if lentovihjemahdollisuus == 1:
+                print("After a long night of looking at all the pieces you figured out something! ")
+                return 9
+            else:
+                print("You spent the night staring at the ceiling not seeing any possible connections.")
+                return 3
+        else:
+            lentosiirtomahdollisuus = random.randint(1, 6)
+            if lentosiirtomahdollisuus == 1:
+                print("They were able to quickly get you to a small nearby airport with a plane ready.")
+                return 1
+            else:
+                print("They called you a liar and told you to wait for tomorrow.")
+                return 3
