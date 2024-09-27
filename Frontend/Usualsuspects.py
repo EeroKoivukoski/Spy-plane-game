@@ -42,10 +42,10 @@ Do you fight back or accept the new reality?: """)
     #HQ lähettää sinulle aseen
     elif valinta == 2 and gun == 0:
         print("""
-        You get a call from HQ 
-        The Call is from your boss who tells you that they got new funding for weapons.
-        Apparently you are getting your very own pistol!
-        """)
+You get a call from HQ 
+The Call is from your boss who tells you that they got new funding for weapons.
+Apparently you are getting your very own pistol!
+""")
         return 8
     # HQ saa selville ulkonäön osan
     elif valinta == 2:
@@ -388,12 +388,10 @@ the speed limit.
                     autokarku = numerochecker(autokarku, 3)
                     if autokarku == 1:
                         if random.randint(1, 3) <= 2:
-                            print(
-                                "You barely got hit by the car! the car leaves while you lay on the ground and you go to the hospital.")
+                            print("You barely got hit by the car! the car leaves while you lay on the ground and you go to the hospital.")
                             return 3
                         else:
-                            print(
-                                "The Car barely misses you since it didn't fit in the alley. You pull the driver out of the  car and get\ninformation about the spy for letting him leave.")
+                            print("The Car barely misses you since it didn't fit in the alley. You pull the driver out of the  car and get\ninformation about the spy for letting him leave.")
                             return 2
                     elif autokarku == 2:
                         if random.randint(1, 3) <= 2:
@@ -435,30 +433,30 @@ the speed limit.
     elif valinta == 11 and madness == 1:
         print("The weather report looks stormy.")
         hullumyrskylentovalinta = input("""
-    the airport PSA says that all flights have been cancelled for the day because of the poor weather conditions.
-    You see an unoccupied plane right outside the exit on the airstrip. You get an idea. 
+the airport PSA says that all flights have been cancelled for the day because of the poor weather conditions.
+You see an unoccupied plane right outside the exit on the airstrip. You get an idea. 
 
-    [1] Steal the plane!
-    [2] What?!
-    """)
+[1] Steal the plane!
+[2] What?!
+""")
         hullumyrskylentovalinta = numerochecker(hullumyrskylentovalinta, 2)
         if hullumyrskylentovalinta == 1:
             print("""You jump on the plane and pierce the stormy sky.
-    You will do whatever it takes to find your target.""")
+You will do whatever it takes to find your target.""")
             return 1
         else:
             print("""Your sentient body drags your reluctant mind inside the plane.
-    You fly though the thundering skies realizing that your body has a mission of its own""")
+You fly though the thundering skies realizing that your body has a mission of its own""")
             return 1
 
 
     elif valinta == 11:
         print("The weather report looks stormy")
         myrskylentovalinta = input("""
-    The airport PSA says that all flights have been cancelled for the day because of the poor weather conditions.
+The airport PSA says that all flights have been cancelled for the day because of the poor weather conditions.
 
-    [1] Spend the day piecing together possible clues.
-    [2] Explain the situation airport management hoping for a quick transfer to a nearby airport.""")
+[1] Spend the day piecing together possible clues.
+[2] Explain the situation airport management hoping for a quick transfer to a nearby airport.""")
         myrskylentovalinta = numerochecker(myrskylentovalinta, 2)
         if myrskylentovalinta == 1:
             lentovihjemahdollisuus = random.randint(1, 6)
