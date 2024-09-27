@@ -1,4 +1,5 @@
-import sys,time,random
+import random
+from asci_lib import asci
 
 def numerochecker(y,z):
    z+=1
@@ -15,12 +16,13 @@ def numerochecker(y,z):
         y=input("Enter the input: ")
 
 
-def minipeli(country,madness):
+def minipeli(country,madness,foodpoisoning):
     valinta = random.randint(1, 10)
-    # Esimerkki
+    # Madness good event
     if valinta == 1 and madness == 1:
         print("You imagine yourself going back in time. Your madness becomes reality. ")
         return 4
+    # Madness trait
     elif valinta == 1:
         mielentila = input("""
 The walls are closing in. 
@@ -38,6 +40,7 @@ Do you fight back or accept the new reality?: """)
         return 5
     # HQ saa selville ulkonäön osan
     elif valinta == 2:
+        asci("radio")
         print("""
 You get a call from HQ 
 The Call is from your boss who tells you that they found new data on the suspect.
@@ -47,17 +50,20 @@ The Call is from your boss who tells you that they found new data on the suspect
     elif valinta == 3:
         print("""
 You felt quite hungry and chose to go for a bite.
-You ate at the airport like normal.
+You ate street food at a grill for cheap.
 """)
-
-        return 1
+        illness = random.randint(1, 10)
+        if illness == 1:
+            return 6
+        else:
+            return 1
     # Hukkunut lippu
     elif valinta == 4:
         print("""
 While walking through the airport like normal, you notice that your ticket is missing.
 You probably accidentally dropped your ticket.
 """)
-        choice = input(f"[1] Yes\n[2] No\n\nDo you stay a day to find your ticket?")
+        choice = input(f"[1] Yes\n[2] No\n\nDo you stay a day to find your ticket?: ")
         choice = numerochecker(choice,2)
         if choice == 1:
             z=random.randint(1,10)
@@ -74,8 +80,7 @@ you will get a location where info of the suspect is hidden.
 [1] Yes
 [2] No
 
-Do you want the make a deal.:
- """)
+Do you want the make a deal?: """)
                 choiceinfo=numerochecker(choiceinfo,2)
                 if choiceinfo == 1:
                     rng=random.randint(1,10)
@@ -86,9 +91,9 @@ Do you want the make a deal.:
                         print("You hide the file under the bridge... and get the location of the info!")
                         return 4
                 if choiceinfo == 2:
-                    print("You leave the airport thinking about what could have been")
+                    print("You leave the airport thinking about what could have been.")
         else:
-            print("You leave the airport thinking about your dear lost ticket :(.")
+            print("You leave the airport thinking about your dear lost ticket. :(")
             return 1
     # Tappelu konnien kanssa
     elif valinta == 5:
@@ -112,7 +117,7 @@ One of the goons whispers to the other "hey, isn't that the guy we're supposed t
         else:
             print("You successfully run away!")
             return 1
-#Mainos "ständi"
+    # Mainos "ständi"
     elif valinta == 6:
         print('''
 While moving through the airport, you spot a advertisement stand.
@@ -168,6 +173,7 @@ You decide to ask them about the spy you're tracking and
 they do not find him and you leave the stand with a grin on your face.
 ''')
                 return 1
+    # Madness bad event
     elif valinta == 7 and madness == 1:
         print('''
 You are walking at the airport and you feel that the world is against you.
@@ -184,10 +190,11 @@ but your violence felt justified. """)
             print("""You fight the airport and break a door despite your decision.
 You waste a day in jail. """)
             return 3
+    # Uneasy feeling
     elif valinta == 7:
         print("You feel a sense of unease but carry on.")
         return 1
-    #trivia
+    # Trivia based on current country
     elif valinta == 8:
         if country == "Finland":
             answer=(input("What is the capital of Finland?: ")).upper()
@@ -230,9 +237,9 @@ You waste a day in jail. """)
                 print("WRONG!")
                 return 3
         else:
-            noneofthesegoddamncountries = minipeli(country,madness)
+            noneofthesegoddamncountries = minipeli(country,madness,foodpoisoning)
             return noneofthesegoddamncountries
-
+    # Old man encounter
     elif valinta == 9:
 
         choice = input('''
@@ -304,8 +311,8 @@ Thankfully, they spare all but your phone and wallet.
                 if choice == 3:
                     print("You escape from the old man with no problems")
                     return 1
-
-    elif valinta == 10:
+    # Ruokamyrkytys lopputulos :)
+    elif valinta == 10 and foodpoisoning == 1:
         print("""
 Your gut feels off. You suspect that the food you just ate was spoiled. 
 
@@ -322,23 +329,27 @@ You lay waste on the plane. Your sewage was potent enough to cancel the flight.
 The airport staff never found out it was you but they will remember. 
 You wasted a day due to your cancelled flight.
 """)
-                return 3
+                return 7
             else:
-                print("You survived the flight. ")
+                print("You survived the flight.")
                 return 1
         elif vessavalinta != 1:
             nextflightlaskuri = random.randint(1,2)
             if nextflightlaskuri == 1:
-                print("Luckily you were able to get on the next flight and only lost a few hours! ")
+                print("Luckily you were able to get on the next flight and only lost a few hours!")
                 extraclue = random.randint(1,7)
                 if extraclue > 1:
                     return 1
                 if extraclue == 1:
-                    print("You got a tip of your target from an unknown source. ")
+                    print("Apparently an informant whose phone died was coming to you, and since you stayed you got to talk with him.")
                     return 2
             if nextflightlaskuri == 2:
-                print("You waste the day at the airport. ")
+                print("There were no other flights to your destination today, so waste the day at the airport.")
                 return 3
+    elif valinta == 10:
+        print('''You are walking through a 
+        ''')
+        return 1
 
 
 def minipelitulos(z):
@@ -354,16 +365,3 @@ def minipelitulos(z):
     elif z == 4:
         print("You travel fast!(save a day.)")
         return -1
-
-
-def person_like_type(t):
-    x=1
-    for l in t:
-        sys.stdout.write(l)
-        sys.stdout.flush()
-        if x == 40:
-            time.sleep((random.random() * 0.5) * 0.0000000000000000001)
-            x=0
-        else:
-            x+=1
-    print('')

@@ -30,6 +30,7 @@ def main():
 
     #Traits
     madness=0
+    foodpoisoning=0
 
     # Muuttujat
     km_flown = 0
@@ -59,9 +60,10 @@ def main():
 
         day += 1
 
-        minipelitulos = Usualsuspects.minipeli(current['country'], madness)
-
-        if minipelitulos == 2:
+        minipelitulos = Usualsuspects.minipeli(current['country'], madness, foodpoisoning)
+        if minipelitulos == 1:
+            print("Nothing happens.")
+        elif minipelitulos == 2:
             print_clue(suspect, given_clues)
         elif minipelitulos == 3:
             print("You lost a day!")
@@ -69,11 +71,18 @@ def main():
         elif minipelitulos == 4:
             print("You travel faster than expected! You gain an extra day.")
             day -= 1
-        elif minipelitulos == 1:
-            print("Nothing happens.")
         elif minipelitulos == 5:
-            print('You qained the trait "Mad"')
+            print('You gained the trait "Mad".')
             madness = 1
+        elif minipelitulos == 6:
+            print('You gained the trait "Food poisoning".')
+            foodpoisoning = 1
+        elif minipelitulos == 7:
+            print("You lost a day!")
+            day += 1
+            print('You lost the trait "Food poisoning".')
+            foodpoisoning = 0
+
 
         input('\nPress enter to continue')
 
@@ -122,7 +131,7 @@ def main():
             km_flown += calculate_distance(current, closest[selection])
             current = closest[selection]
         elif eveningoptions == 2:
-            minipelitulos = Usualsuspects.minipeli(current['country'],madness)
+            minipelitulos = Usualsuspects.minipeli(current['country'],madness,foodpoisoning)
             if minipelitulos == 2:
                 print_clue(suspect, given_clues)
             elif minipelitulos == 3:
@@ -152,7 +161,9 @@ def main():
 
             selection = int(input("\nEnter a number to arrest a person: ")) - 1
             if selection == enemy_index:
-                print("You arrested the thief! You win! \nYou won in",day-1,"Days!")
+                print("You arrested the thief!")
+                asci_lib.asci("vakooja")
+                print("You win! \nYou won in",day-1,"Days!")
                 exit()
             else:
                 print("You arrested an innocent person. The spy hears about it and moves to another airport.")
