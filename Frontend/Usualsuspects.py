@@ -17,7 +17,7 @@ def numerochecker(y,z):
         y=input("Enter the input: ")
 
 
-def minipeli(country,madness,foodpoisoning,gun):
+def minipeli(country,madness,foodpoisoning,gun,guns):
     valinta = random.randint(1, 11)
     # Madness good event(todo: ascii)
     if valinta == 1 and madness == 1:
@@ -40,11 +40,19 @@ Do you fight back or accept the new reality?: """)
             print("You hit your head against a wall until it goes numb. ")
         return 5
     #HQ lähettää sinulle aseen
-    elif valinta == 2 and gun == 0:
+    elif valinta == 2 and gun == 0 and guns==0:
         print("""
 You get a call from HQ 
 The Call is from your boss who tells you that they got new funding for weapons.
 Apparently you are getting your very own pistol!
+""")
+    # Uusi ase, ensimmäinen hävitetty
+        return 8
+    elif valinta == 2 and gun == 0 and guns == 1:
+        print("""
+You get a call from HQ 
+Your application for a replacement pistol has been processed, and accepted!
+This will impact your next salary.
 """)
         return 8
     # HQ saa selville ulkonäön osan
@@ -246,7 +254,7 @@ You waste a day in jail. """)
                 print("WRONG!")
                 return 3
         else:
-            noneofthesegoddamncountries = minipeli(country,madness,foodpoisoning,gun)
+            noneofthesegoddamncountries = minipeli(country,madness,foodpoisoning,gun,guns)
             return noneofthesegoddamncountries
     # Old man encounter (todo:ascii)
     elif valinta == 9:

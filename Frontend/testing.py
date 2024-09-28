@@ -32,6 +32,7 @@ def main():
     madness=0
     foodpoisoning=0
     gun=0
+    guns=0
 
     # Muuttujat
     km_flown = 0
@@ -61,7 +62,7 @@ def main():
 
         day += 1
 
-        minipelitulos = Usualsuspects.minipeli(current['country'], madness, foodpoisoning,gun)
+        minipelitulos = Usualsuspects.minipeli(current['country'], madness, foodpoisoning,gun,guns)
         if minipelitulos == 1:
             print("Nothing happens.")
         elif minipelitulos == 2:
@@ -86,11 +87,18 @@ def main():
         elif minipelitulos == 8:
             print("You got a gun.")
             gun=1
+            guns=1
         elif minipelitulos == 9:
             print("You lost a day but got a clue!")
             day += 1
             print_clue(suspect, given_clues)
 
+        elif minipelitulos == 10:
+            print("You lost your gun!")
+            gun = 0
+        elif minipelitulos == 11:
+            print('You regain your sanity (Lost trait "Mad")')
+            madness = 0
 
         input('\nPress enter to continue')
 
@@ -139,7 +147,7 @@ def main():
             km_flown += calculate_distance(current, closest[selection])
             current = closest[selection]
         elif eveningoptions == 2:
-            minipelitulos = Usualsuspects.minipeli(current['country'],madness,foodpoisoning,gun)
+            minipelitulos = Usualsuspects.minipeli(current['country'],madness,foodpoisoning,gun,guns)
             if minipelitulos == 2:
                 print_clue(suspect, given_clues)
             elif minipelitulos == 3:
@@ -164,10 +172,17 @@ def main():
             elif minipelitulos == 8:
                 print("You got a gun.")
                 gun = 1
+                guns=1
             elif minipelitulos == 9:
                 print("You lost a day but got a clue!")
                 day += 1
                 print_clue(suspect, given_clues)
+            elif minipelitulos == 10:
+                print("You lost your gun!")
+                gun = 0
+            elif minipelitulos == 11:
+                print('You regain your sanity (Lost trait "Mad")')
+                madness = 0
 
             input('\nPress enter to continue')
         elif eveningoptions == 3 and current == enemy_airport:
