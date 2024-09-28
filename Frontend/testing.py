@@ -88,6 +88,7 @@ def main():
             print("You got a gun.")
             gun=1
             guns=1
+            asci_lib.asci("GUN")
         elif minipelitulos == 9:
             print("You lost a day but got a clue!")
             day += 1
@@ -173,6 +174,7 @@ def main():
                 print("You got a gun.")
                 gun = 1
                 guns=1
+                asci_lib.asci("GUN")
             elif minipelitulos == 9:
                 print("You lost a day but got a clue!")
                 day += 1
