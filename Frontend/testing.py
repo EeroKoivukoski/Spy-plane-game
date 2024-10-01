@@ -129,14 +129,14 @@ def main():
         if eveningoptions == 1:
             print("Where would you like to fly next?")
             print(f"You are currently at {current['name']} in {current['country']}.")
-            # Navigaatiosysteemi kokeilun vuoksi - ei pakko käyttää
             print(f"{navigation(current, enemy_airport)}\n")
 
             # Hae n lähintä lentokenttää listaan
             # TODO: fiksumpi tapa tehdä tämä, näin voi jäädä kenttiä pois tai jumiin
             # Listaa ensin maat, sitten maan perusteella kentät(?)
+            # Näytä onko kenttä lähempänä vai kauempana rosvosta kuin nykyinen kenttä(?)
+            # Nyt navigointi on aika hämärää -> kestää kauan ja tylsää pelaajalle
             closest = get_closest_airports(current, 15)
-            #closest = get_airports_radius(current, 500)
 
             # Loop lähimpien kenttien läpi
             i = 1
