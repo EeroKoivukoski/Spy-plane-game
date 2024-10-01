@@ -21,6 +21,7 @@ enemy = {}
 
 def main():
     all_airports = get_airports()
+
     #Rosvon ulkonäkö
     suspect = generate_person()
 
@@ -29,10 +30,11 @@ def main():
     enemy_airport = random.choice(all_airports)
 
     #Traits
-    madness=0
-    foodpoisoning=0
-    gun=0
-    guns=0
+    madness = 0
+    foodpoisoning = 0
+    #? mikä ero
+    gun = 0
+    guns = 0
 
     # Muuttujat
     km_flown = 0
@@ -42,27 +44,37 @@ def main():
     given_clues = []
     max_days = 30
 
-    #Näyttää intronäytön
+    # Intro
+    # todo: tulosta lore, mitä tapahtuu, mitä pitää tehdä, tavoitteet, miten pelata, etc
     asci_lib.asci("intro")
     input("Press enter to start the game")
 
     # Main loop
     while True:
+
+        # Lopeta peli jos päivät täynnä
         if max_days <= day:
             asci_lib.asci("gameover")
             exit()
+
+        # Tulosta info
         print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
         print(f"You have travelled {km_flown} km in {day} day(s).\n")
         print(f"You have {max_days - day} days left.")
 
+        # Siirrä rosvoa
         if day - last_move_day >= 5:
-            print("You see on the tracker that the suspect changed places")
+            print("You see on the tracker that the suspect has fled to another airport!")
             enemy_airport = random.choice(all_airports)
             last_move_day = day
 
         day += 1
 
+        #todo: Anna pelaajan valita ensin pelaako vai lentääkö - ei suoraan minipeliä
+
         minipelitulos = Usualsuspects.minipeli(current['country'], madness, foodpoisoning,gun,guns)
+
+        # Nämä minipelifunktioon osittain?
         if minipelitulos == 1:
             print("Nothing happens.")
         elif minipelitulos == 2:
@@ -103,6 +115,9 @@ def main():
 
         input('\nPress enter to continue')
 
+        # Haluatko lentää vai minipelin?
+        # Vaihtoehdot voisi olla esim: [1] Fly to another airport [2] Stay and look for clues
+        # todo: jos samalla kentällä kuin rosvo -> suoraan guess who-arvailuun, ei muita vaihtoehtoja (miksi?)
         if current == enemy_airport:
             eveningoptions = input('\n[1] Fly to another airport \n[2] Stay at this airport \n[3] try to guess who the spy is at this airport \nWhat do you want to do: ')
             eveningoptions = Usualsuspects.numerochecker(eveningoptions, 3)
@@ -110,14 +125,16 @@ def main():
             eveningoptions = input('\n[1] Fly to another airport \n[2] Stay at this airport  \nWhat do you want to do: ')
             eveningoptions = Usualsuspects.numerochecker(eveningoptions, 2)
 
+        # Lennä muualle
         if eveningoptions == 1:
             print("Where would you like to fly next?")
             print(f"You are currently at {current['name']} in {current['country']}.")
             # Navigaatiosysteemi kokeilun vuoksi - ei pakko käyttää
             print(f"{navigation(current, enemy_airport)}\n")
 
-            # Hae 10 lähintä lentokenttää listaan
+            # Hae n lähintä lentokenttää listaan
             # TODO: fiksumpi tapa tehdä tämä, näin voi jäädä kenttiä pois tai jumiin
+            # Listaa ensin maat, sitten maan perusteella kentät(?)
             closest = get_closest_airports(current, 15)
             #closest = get_airports_radius(current, 500)
 
@@ -130,6 +147,7 @@ def main():
                 i += 1
 
             # Valitse ja päivitä tämänhetkinen kenttä & kilometrit
+            # Tämä numerofunktioon?
             while True:
                 selection = input("\nEnter a number to continue: ")
                 try:
@@ -147,6 +165,9 @@ def main():
 
             km_flown += calculate_distance(current, closest[selection])
             current = closest[selection]
+
+        # Koodi toistuu
+        # todo: minipelin tulos toiseen funktioon (rakennetta uusiksi?)
         elif eveningoptions == 2:
             minipelitulos = Usualsuspects.minipeli(current['country'],madness,foodpoisoning,gun,guns)
             if minipelitulos == 2:
@@ -187,10 +208,12 @@ def main():
                 madness = 0
 
             input('\nPress enter to continue')
+
+        # Tee tämä suoraan jos samalla kentällä kuin rosvo
         elif eveningoptions == 3 and current == enemy_airport:
             print("You see the following people...\nWho is the thief?\n")
             enemy_index = random.randint(0, 9)
-            last_move_day=day
+            last_move_day = day
             for i in range(10):
                 if i == enemy_index:
                     print(f"{[i + 1]} {describe_person(suspect)}")
@@ -263,15 +286,6 @@ def get_airports():
         airports.append(airport)
 
     return airports
-
-
-# # Hae tietokannasta maan nimi ISO-koodin perusteella
-# def get_country_by_code(iso):
-#     sql = f'select name from country where iso_country = "{iso}"'
-#     cursor = connection.cursor()
-#     cursor.execute(sql)
-#     result = cursor.fetchall()
-#     return result[0][0]
 
 
 def navigation(current, target):
@@ -366,8 +380,6 @@ def print_clue(suspect, given_clues):
         print(f"The suspect has {suspect[feature]}.")
     elif feature == "clothes":
         print(f"The suspect is wearing {suspect[feature]}.")
-    else:
-        print("This is supposed to be a clue - something went wrong!")
 
 
 main()
