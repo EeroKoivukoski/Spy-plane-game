@@ -27,6 +27,7 @@ def main():
 
     # Pelaaja ja rosvo random kentillä (todo: varmista että rosvo tarpeeksi kaukana pelaajasta)
     current = random.choice(all_airports)
+    last = 0
     enemy_airport = random.choice(all_airports)
 
     #Traits
@@ -43,7 +44,6 @@ def main():
     # clues = 0
     given_clues = []
     max_days = 30
-
     # Intro
     # todo: tulosta lore, mitä tapahtuu, mitä pitää tehdä, tavoitteet, miten pelata, etc
     asci_lib.asci("intro")
@@ -58,7 +58,17 @@ def main():
             exit()
 
         # Tulosta info
-        print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.")
+        if last == 0:
+            print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.\n")
+            last = current
+        elif last['country'] == current['country'] and last['name'] != current['name']:
+            print(f"\nWelcome to {current['name']}!")
+            last =current
+        elif last != current:
+            print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.\n")
+            last = current
+        else:
+            print(f"\nYou are still in {current['country']} at {current['name']}.\n")
         print(f"You have travelled {km_flown} km in {day} day(s).\n")
         print(f"You have {max_days - day} days left.")
 
@@ -68,58 +78,11 @@ def main():
             enemy_airport = random.choice(all_airports)
             last_move_day = day
 
-        day += 1
-
-        #todo: Anna pelaajan valita ensin pelaako vai lentääkö - ei suoraan minipeliä
-
-        minipelitulos = Usualsuspects.minipeli(current['country'], madness, foodpoisoning,gun,guns)
-
-        # Nämä minipelifunktioon osittain?
-        if minipelitulos == 1:
-            print("Nothing happens.")
-        elif minipelitulos == 2:
-            print_clue(suspect, given_clues)
-        elif minipelitulos == 3:
-            print("You lost a day!")
-            day += 1
-        elif minipelitulos == 4:
-            print("You travel faster than expected! You gain an extra day.")
-            day -= 1
-        elif minipelitulos == 5:
-            print('You gained the trait "Mad".')
-            madness = 1
-        elif minipelitulos == 6:
-            print('You gained the trait "Food poisoning".')
-            foodpoisoning = 1
-        elif minipelitulos == 7:
-            print("You lost a day!")
-            day += 1
-            print('You lost the trait "Food poisoning".')
-            foodpoisoning = 0
-        elif minipelitulos == 8:
-            print("You got a gun.")
-            gun=1
-            guns=1
-            asci_lib.asci("GUN")
-        elif minipelitulos == 9:
-            print("You lost a day but got a clue!")
-            day += 1
-            print_clue(suspect, given_clues)
-
-        elif minipelitulos == 10:
-            print("You lost your gun!")
-            gun = 0
-        elif minipelitulos == 11:
-            print('You regain your sanity (Lost trait "Mad")')
-            madness = 0
-
-        input('\nPress enter to continue')
-
-        # Haluatko lentää vai minipelin?
+        # Haluatko lentää vai minipeli?
         # Vaihtoehdot voisi olla esim: [1] Fly to another airport [2] Stay and look for clues
         # todo: jos samalla kentällä kuin rosvo -> suoraan guess who-arvailuun, ei muita vaihtoehtoja (miksi?)
         if current == enemy_airport:
-            eveningoptions = input('\n[1] Fly to another airport \n[2] Stay at this airport \n[3] try to guess who the spy is at this airport \nWhat do you want to do: ')
+            eveningoptions = input('\n[1] Fly to another airport \n[2] Look around \n[3] try to guess who the spy is at this airport \nWhat do you want to do: ')
             eveningoptions = Usualsuspects.numerochecker(eveningoptions, 3)
         else:
             eveningoptions = input('\n[1] Fly to another airport \n[2] Stay at this airport  \nWhat do you want to do: ')
@@ -204,9 +167,12 @@ def main():
                 print("You lost your gun!")
                 gun = 0
             elif minipelitulos == 11:
+                print("You lost your gun... But gained a clue.")
+                gun = 0
+                print_clue(suspect, given_clues)
+            elif minipelitulos == 12:
                 print('You regain your sanity (Lost trait "Mad")')
                 madness = 0
-
             input('\nPress enter to continue')
 
         # Tee tämä suoraan jos samalla kentällä kuin rosvo

@@ -117,12 +117,18 @@ Do you want the make a deal?: """)
         print('''
 You are moving through the airport until you come accross three intimidating fellows.
 One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
-
-[1] Fight (50% reward, 50% penalty)
-[2] Run(100% success)
+    
+[1] Fight
+[2] Run
 ''')
-        choice = input('Do you want to fight the goons?: ')
-        choice = numerochecker(choice,2)
+        if gun == 0:
+            choice = input('Do you want to fight the goons?: ')
+            choice = numerochecker(choice, 2)
+        else:
+            choice = input('Do you want to fight the goons?: ')
+            choice = numerochecker(choice, 2)
+            if choice == 1:
+                choice=int(3)
         if choice == 1:
             tappelu = random.randint(1, 10)
             if tappelu == 1:
@@ -131,9 +137,14 @@ One of the goons whispers to the other "hey, isn't that the guy we're supposed t
             else:
                 print("You lose to the goons and have to waste a day resting.")
                 return 3
-        else:
+        if choice == 2:
             print("You successfully run away!")
             return 1
+        if choice == 3:
+            print("You win the fight and interrogate the goons!"
+                  "You lose your gun in the mettle.")
+            return 4
+
     # Mainos "ständi" (todo: eri ascii eri ständeihin, myös jos jaksaa voisi lisätä ständejä)
     elif valinta == 6:
         print('''
@@ -143,7 +154,7 @@ You have to walk past them to get to the seats.
 [1] Try to iqnore them and walk past em'
 [2] Talk with the advertisers?
 ''')
-        choice=input('Do you want to ignore the advertisers')
+        choice=input('Do you want to ignore the advertisers: ')
         choice = numerochecker(choice, 2)
         if choice == 1:
             print("You ignored the workers despite the advertisers best attempts.")
@@ -256,9 +267,9 @@ You waste a day in jail. """)
         else:
             noneofthesegoddamncountries = minipeli(country,madness,foodpoisoning,gun,guns)
             return noneofthesegoddamncountries
-    # Old man encounter (todo:ascii)
+    # Old man encounter
     elif valinta == 9:
-
+        asci('VANHAMIES')
         choice = input('''
 A strange old man with a thick accent asks you for directions. 
 He seems quite nervous..
