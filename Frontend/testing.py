@@ -33,7 +33,6 @@ def main():
     #Traits
     madness = 0
     foodpoisoning = 0
-    #? mikä ero
     gun = 0
     guns = 0
 
@@ -90,6 +89,7 @@ def main():
 
         # Lennä muualle
         if eveningoptions == 1:
+            day+=1
             print("Where would you like to fly next?")
             print(f"You are currently at {current['name']} in {current['country']}.")
             print(f"{navigation(current, enemy_airport)}\n")

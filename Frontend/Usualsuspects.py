@@ -106,7 +106,7 @@ Do you want the make a deal?: """)
                         return 3
                     if rng > 6:
                         print("You hide the file under the bridge... and get the location of the info!")
-                        return 4
+                        return 2
                 if choiceinfo == 2:
                     print("You leave the airport thinking about what could have been.")
         else:
@@ -143,7 +143,7 @@ One of the goons whispers to the other "hey, isn't that the guy we're supposed t
         if choice == 3:
             print("You win the fight and interrogate the goons!"
                   "You lose your gun in the mettle.")
-            return 4
+            return 11
 
     # Mainos "ständi" (todo: eri ascii eri ständeihin, myös jos jaksaa voisi lisätä ständejä)
     elif valinta == 6:
@@ -443,7 +443,7 @@ the speed limit.
                             print("You dodge the car and you run away.")
                             return 1
                     else:
-                        print("You shoot at the driver and hit him.\nThe car turns around and drives away.")
+                        print("You shoot at the driver and hit him.\nThe car turns around and drives away.\nYour gun broke when you fired it. I guess you shouldnt use antiques.")
                         return 1
         else:
                 input("You leave the car alone.")
