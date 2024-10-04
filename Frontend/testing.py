@@ -48,6 +48,8 @@ def main():
     asci_lib.asci("intro")
     input("Press enter to start the game")
 
+    input("Press enter to start the game")
+
     # Main loop
     while True:
 
