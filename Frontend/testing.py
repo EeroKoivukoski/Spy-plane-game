@@ -44,12 +44,20 @@ def main():
     given_clues = []
     max_days = 30
     # Intro
-    # todo: tulosta lore, mitä tapahtuu, mitä pitää tehdä, tavoitteet, miten pelata, etc
     asci_lib.asci("intro")
     input("Press enter to start the game")
+    asci_lib.asci('tutorial')
+    tutorial=input('')
+    tutorial=Usualsuspects.numerochecker(tutorial,2)
+    if tutorial == 1:
+        print("you selected option 1")
+    else:
+        print("you selected option 2")
+    input("press any key to continue")
     asci_lib.asci("loreone")
-    mission=input("")
-    if mission == "2":
+    mission=input()
+    mission=Usualsuspects.numerochecker(mission,2)
+    if mission == 2:
         asci_lib.asci('missionnah')
         exit()
 
