@@ -17,14 +17,17 @@ connection = mysql.connector.connect(
 
 
 def main():
-    # LOGIN, UUSI/LATAA PELI
-    username = input("Anna käyttäjä: ")
-    all_airports = get_all_airports()
-
+    # Helsinki-Vantaan koordinaatit testauksen vuoksi
     hki = {
         "latitude": 60.3172,
         "longitude": 24.963301
     }
+
+    # Kaikki kentät muuttujaan
+    all_airports = get_all_airports()
+
+    # Login
+    username = input("Anna käyttäjä: ")
 
     # Pelaajan oletusmuuttujat
     player = {
@@ -35,41 +38,55 @@ def main():
     }
     player["distance_to_helsinki"] = calculate_distance(player["airport"], hki)
 
+    # Hae data tietokannasta käyttäjänimen perusteella
     data = get_player_data(username)
+
+    # Jos pelaaja on jo (dataa löytyi) -> valitse uusi tai lataa ed. peli
     if data:
         selection = input("Uusi peli vai lataa edellinen? (uusi/lataa): ").lower()
         while selection not in ["uusi", "lataa"]:
             selection = input("Uusi peli vai lataa edellinen? (uusi/lataa): ").lower()
+
+        # Ladataan vanha peli = korvataan pelaajan oletusmuuttujat tietokantadatalla
         if selection == "lataa":
             player = data
-            # Lentokentän nimi -> kenttä-dictionary
+            # Tietokannassa pelaajadatassa vain kentän nimi -> sanakirjaksi jossa muutakin infoa
             for airport in all_airports:
                 if airport["name"] == player["airport"]:
                     player["airport"] = airport
+
+        # Valitaan uusi peli = päivitetään rivi tietokannan taulussa
         elif selection == "uusi":
             update_player(player)
+
+    # Dataa ei löytynyt -> lisätään rivi tauluun
     else:
         insert_new_player(player)
 
     # MAIN LOOP
     while True:
+        # Tulostetaan infot
         print(f"\nSijaintisi: {player['airport']['name']}")
         print(f"Olet {player['distance_to_helsinki']} km päässä Helsinki-Vantaalta.")
         print(f"Sinulla on {player['money']} €.")
         print(f"Minne haluat lentää?\n")
 
+        # Tulostetaan lista kentistä joihin lentää
         for i in range(len(all_airports)):
             index = f"[{i+1}]"
             print(f"{index:<4} {all_airports[i]['name']:32} ({calculate_distance(player['airport'], all_airports[i])} €)")
 
+        # Valitaan kenttä ja muutetaan pelaajan muuttujia sen perusteella
         selection = int(input("\nSyötä numero: ")) - 1
         player["money"] -= calculate_distance(player["airport"], all_airports[selection])
         player["airport"] = all_airports[selection]
         player["distance_to_helsinki"] = calculate_distance(player["airport"], hki)
 
+        # Päivitetään tietokantaan pelaajan muuttujat
         update_player(player)
 
 
+# Etäisyys kenttien välillä
 def calculate_distance(airport1, airport2):
     a = (airport1["latitude"], airport1["longitude"])
     b = (airport2["latitude"], airport2["longitude"])
@@ -77,6 +94,7 @@ def calculate_distance(airport1, airport2):
     return dist
 
 
+# Päivittää tietokantaan pelaajan muuttujat, eli korvaa rivin taulukosta muuttuja-sanakirjalla
 def update_player(player):
     sql = f"""
     update test_game
@@ -89,6 +107,7 @@ def update_player(player):
     cursor.execute(sql)
 
 
+# Lisää uuden pelaajan (rivin) tietokantataulukkoon
 def insert_new_player(player):
     sql = f"""
     insert into test_game values
@@ -101,6 +120,7 @@ def insert_new_player(player):
     cursor.execute(sql)
 
 
+# Hakee nimen perusteella pelaajan datan/muuttujat, ja palauttaa sanakirjan
 def get_player_data(username):
     sql = f"""
     select name, airport, money, distance_to_helsinki from test_game
@@ -120,6 +140,7 @@ def get_player_data(username):
     return data
 
 
+# Hakee kaikki kentät
 def get_all_airports():
     sql = """
     select name, latitude_deg, longitude_deg from airport
