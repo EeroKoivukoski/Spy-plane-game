@@ -47,8 +47,11 @@ def main():
     # todo: tulosta lore, mitä tapahtuu, mitä pitää tehdä, tavoitteet, miten pelata, etc
     asci_lib.asci("intro")
     input("Press enter to start the game")
-
-    input("Press enter to start the game")
+    asci_lib.asci("loreone")
+    mission=input("")
+    if mission == "2":
+        asci_lib.asci('missionnah')
+        exit()
 
     # Main loop
     while True:
