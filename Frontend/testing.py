@@ -61,6 +61,7 @@ def main():
         asci_lib.asci('missionnah')
         exit()
 
+
     # Main loop
     while True:
 
@@ -71,7 +72,8 @@ def main():
 
         # Tulosta info
         if last == 0:
-            print(f"\nWelcome to {current['country']}! You are currently at {current['name']}.\n")
+            print(f"Good Luck!"
+                  f"\nWelcome to {current['country']}! You are currently at {current['name']}.\n")
             last = current
         elif last['country'] == current['country'] and last['name'] != current['name']:
             print(f"\nWelcome to {current['name']}!")
