@@ -72,8 +72,7 @@ def main():
 
         # Tulosta info
         if last == 0:
-            print(f"Good Luck!"
-                  f"\nWelcome to {current['country']}! You are currently at {current['name']}.\n")
+            print(f"Good Luck!\nWelcome to {current['country']}! You are currently at {current['name']}.\n")
             last = current
         elif last['country'] == current['country'] and last['name'] != current['name']:
             print(f"\nWelcome to {current['name']}!")
@@ -277,7 +276,6 @@ def navigation(current, target):
 
     target_coords = (target["latitude"], current["longitude"])
     latitude_dist = round(distance.distance(current_coords, target_coords).km)
-    latitude_out = ""
     if current["latitude"] <= target["latitude"]:
         latitude_out = f"{latitude_dist} km north"
     else:
@@ -285,7 +283,6 @@ def navigation(current, target):
 
     target_coords = (current["latitude"], target["longitude"])
     longitude_dist = round(distance.distance(current_coords, target_coords).km)
-    longitude_out = ""
     if current["longitude"] <= target["longitude"]:
         longitude_out = f"{longitude_dist} km east"
     else:
