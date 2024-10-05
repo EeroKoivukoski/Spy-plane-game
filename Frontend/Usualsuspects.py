@@ -94,8 +94,8 @@ You probably accidentally dropped your card.
             if z > 6:
                 choiceinfo=input("""
 You find your card under a bench you sat at before. You noticed that under the bench next to your card is a message
-which says "You dont know me. But I know who you are searching for". Then the ticket details a deal 
-between you and the messager. The deal is you drop off a file under a bridge nearby then after that 
+which says "You dont know me. But I know who you are searching for. Let's make a deal!". 
+The deal is you drop off a file under a bridge nearby then after that 
 you will get a location where info of the suspect is hidden.
 
 [1] Make a deal with the stranger
