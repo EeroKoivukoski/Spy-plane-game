@@ -14,8 +14,7 @@ connection = mysql.connector.connect(
     database="flight_game",
     user=tietokantatunnukset.user,
     password=tietokantatunnukset.password,
-    autocommit=True
-)
+    autocommit=True)
 
 
 def main():
@@ -23,7 +22,7 @@ def main():
     continue_check = 0
     # Intro ja login
     asci_lib.asci("intro")
-    username = input("Enter your name to start the game")
+    username = input("Enter your name to start the game: ")
 
     player = {
         "name": username,
@@ -37,7 +36,7 @@ def main():
         "km_flown": 0,
         "day": 0,
         "last_move_day": 0,
-        "given_clues": [],
+        "given_clues": "0",
     }
 
     data = get_player_data(username)
@@ -58,7 +57,7 @@ def main():
     else:
         insert_new_player(player)
 
-    suspect = {player["suspect"]}
+    suspect = player["suspect"]
     current = player["current"]
     enemy_airport = player["enemy_airport"]
     madness = player["madness"]
@@ -68,7 +67,7 @@ def main():
     km_flown = player["km_flown"]
     day = player["day"]
     last_move_day = player["last_move_day"]
-    given_clues = player["given_clues"]
+    given_clues = []
     last = 0
 
     # Tutorial
@@ -437,9 +436,9 @@ def get_player_data(username):
 def update_player(player):
     sql = f"""
     update test_game
-    set current = '{player["current"]["country"]},{player["current"]["name"]}',
+    set current = '{player["current"]}',
     suspect = '{player["suspect"]}',
-    enemy_airport = '{player["enemy_airport"]["country"]},{player["enemy_airport"]["name"]}',
+    enemy_airport = '{player["enemy_airport"]}',
     madness = {player["madness"]},
     foodpoisoning = {player["foodpoisoning"]},
     gun = {player["gun"]},
@@ -458,9 +457,9 @@ def insert_new_player(player):
     sql = f"""
     insert into test_game values
     ('{player["name"]}',
-    '{player["current"]["country"]},{player["current"]["name"]}',
-    '{player["suspect"]["height"]},{player["suspect"]["age"]},{player["suspect"]["gender"]},{player["suspect"]["head"]},{player["suspect"]["clothes"]}',
-    '{player["enemy_airport"]["country"]},{player["enemy_airport"]["name"]}',
+    '{player["current"]}',
+    '{player["suspect"]}',
+    '{player["enemy_airport"]}',
     '{player["madness"]}',
     '{player["foodpoisoning"]}',
     '{player["gun"]}',
