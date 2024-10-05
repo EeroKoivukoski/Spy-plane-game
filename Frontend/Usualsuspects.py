@@ -19,8 +19,9 @@ def numerochecker(y,z):
 
 def minipeli(country,madness,foodpoisoning,gun,guns):
     valinta = random.randint(1, 11)
-    # Madness good event(todo: ascii)
+    # Madness good event
     if valinta == 1 and madness == 1:
+        asci('maniac')
         print("You imagine yourself going back in time. Your madness becomes reality. ")
         return 4
     # Madness trait
@@ -37,6 +38,7 @@ Do you fight back or accept the new reality?: """)
             print("You shake your head and the world seems normal again.")
             return 1
         if mielentila == 2:
+            asci('maniac')
             print("You hit your head against a wall until it goes numb. ")
         return 5
     #HQ lähettää sinulle aseen
@@ -51,7 +53,7 @@ Apparently you are getting your very own pistol!
     elif valinta == 2 and gun == 0 and guns == 1:
         print("""
 You get a call from HQ 
-Your application for a replacement pistol has been processed, and accepted!
+Your application for a replacement pistol has been processed...   and accepted!
 This will impact your next salary.
 """)
         return 8
@@ -77,25 +79,26 @@ You ate street food at a grill for cheap.
     # Hukkunut lippu (todo: voisi tehdä kiinnostavamman, myös ascii)
     elif valinta == 4:
         print("""
-While walking through the airport like normal, you notice that your ticket is missing.
-You probably accidentally dropped your ticket.
+While walking through the city like you usually do, 
+you notice that your company credit card is missing.
+You probably accidentally dropped your card.
 """)
-        choice = input(f"[1] Yes\n[2] No\n\nDo you stay a day to find your ticket?: ")
+        choice = input(f"[1] Try looking for it\n[2] Just get a new one \n\nDo you use the day to find your card or do you order a new one?: ")
         choice = numerochecker(choice,2)
         if choice == 1:
             z=random.randint(1,10)
             if z < 7:
-                print("You search for it but when you find it you have missed the flight.")
+                print("You search for it but when you find it, it is too late do anything else. ")
                 return 3
             if z > 6:
                 choiceinfo=input("""
-You find your ticket under a bench. You notice that under the bench next to your ticket is a message
+You find your card under a bench you sat at before. You noticed that under the bench next to your card is a message
 which says "You dont know me. But I know who you are searching for". Then the ticket details a deal 
 between you and the messager. The deal is you drop off a file under a bridge nearby then after that 
 you will get a location where info of the suspect is hidden.
 
-[1] Yes
-[2] No
+[1] Make a deal with the stranger
+[2] Just dismiss the message and be happy about finding your credit card
 
 Do you want the make a deal?: """)
                 choiceinfo=numerochecker(choiceinfo,2)
@@ -105,17 +108,17 @@ Do you want the make a deal?: """)
                         print("You hide the file under the bridge but never get an answer.")
                         return 3
                     if rng > 6:
-                        print("You hide the file under the bridge... and get the location of the info!")
+                        print("You hide the file under the bridge...   and get the location of the info!")
                         return 2
                 if choiceinfo == 2:
-                    print("You leave the airport thinking about what could have been.")
+                    print("You leave the message alone thinking about what could have been.")
         else:
-            print("You leave the airport thinking about your dear lost ticket. :(")
+            print("You leave the card behind while thinking about the possibility that it could have been stolen. :(")
             return 1
     # Tappelu konnien kanssa (todo:voisi olla toisia mahdollisia lopputuloksia esim. konnat lähtevät jahtaamaan, myös ascii)
     elif valinta == 5:
-        print('''
-You are moving through the airport until you come accross three intimidating fellows.
+        asci('intimidating')
+        print('''You are moving through the city until you come accross three intimidating fellows.
 One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
     
 [1] Fight
@@ -148,10 +151,10 @@ One of the goons whispers to the other "hey, isn't that the guy we're supposed t
     # Mainos "ständi" (todo: eri ascii eri ständeihin, myös jos jaksaa voisi lisätä ständejä)
     elif valinta == 6:
         print('''
-While moving through the airport, you spot a advertisement stand.
-You have to walk past them to get to the seats.
+While moving through the a local shopping mall, you spot an advertisement stand.
+You have to walk past them.
 
-[1] Try to iqnore them and walk past em'
+[1] Try to iqnore them.
 [2] Talk with the advertisers?
 ''')
         choice=input('Do you want to ignore the advertisers: ')
@@ -203,6 +206,7 @@ they do not find him and you leave the stand with a grin on your face.
                 return 1
     # Madness bad event (todo: ascii)
     elif valinta == 7 and madness == 1:
+        asci('maniac')
         print('''
 You are walking at the airport and you feel that the world is against you.
 [1] Fight
@@ -213,7 +217,7 @@ You are walking at the airport and you feel that the world is against you.
         if schizo == 1:
             print("""You fight the airport and punch a hole through a wall. You got detained 
 but your violence felt justified. """)
-            return 3
+            return 12
         else:
             print("""You fight the airport and break a door despite your decision.
 You waste a day in jail. """)
@@ -386,8 +390,8 @@ The door opens and you think about entering this luxurious limousine.
         auto=input('Do you enter?: ')
         auto=numerochecker(auto,2)
         if madness == 1:
-            print('''
-Instantly you jump in the car and jump past the man in the back. You pry yourself from the back of the limo to the frontseats. There are 
+            asci('maniac')
+            print('''Instantly you jump in the car and jump past the man in the back. You pry yourself from the back of the limo to the frontseats. There are 
 two very confused men. You manage to kick both of the men out of the limo and you take the wheel. Then you drive to the airport way over
 the speed limit.
 ''')
@@ -420,8 +424,8 @@ the speed limit.
                             print("You dodge the car and you run away.")
                             return 1
                     else:
-                        print("You shoot at the driver and hit him.\nThe car turns around and drives away.")
-                        return 1
+                        print("You shoot at the driver and hit him.\nThe car stops and you interrogate the driver while giving him aid.\nYour gun broke when you fired it. I guess you shouldnt use antiques.")
+                        return 11
                 if gun == 0:
                     print("The car starts chasing you and you have to decide on the counteraction!\n\n[1] Try to get to the nearby alley\n\n[2] Try to dodge the car")
                     autokarku=input('What do you want to do: ')
@@ -429,66 +433,66 @@ the speed limit.
                     if autokarku == 1:
                         if random.randint(1, 3) <= 2:
                             print(
-                                "You barely got hit by the car! the car leaves while you lay on the ground and you go to the hospital.")
+                                "You barely got hit by the car! The car leaves while you lay on the ground. \You somehow don't feel like anythings broken but you go to the hospital anyways.")
                             return 3
                         else:
                             print(
                                 "The Car barely misses you since it didn't fit in the alley. You pull the driver out of the  car and get\ninformation about the spy for letting him leave.")
                             return 2
-                    elif autokarku == 2:
+                    else:
                         if random.randint(1, 3) <= 2:
-                            print("You got hit by the car and end up in the hospital.")
+                            print("You got hit by the car and end up in the hospital. Gladly you somehow only strained your ankle.")
                             return 3
                         else:
-                            print("You dodge the car and you run away.")
+                            print("You dodge the car and you run away unharmed.")
                             return 1
-                    else:
-                        print("You shoot at the driver and hit him.\nThe car turns around and drives away.\nYour gun broke when you fired it. I guess you shouldnt use antiques.")
-                        return 1
         else:
                 input("You leave the car alone.")
                 return 1
 
     elif valinta == 11 and madness == 1:
-        print("The weather report looks stormy.")
         hullumyrskylentovalinta = input("""
-the airport PSA says that all flights have been cancelled for the day because of the poor weather conditions.
-You see an unoccupied plane right outside the exit on the airstrip. You get an idea. 
+the weather report is talking about a hurricane later today in the area.
+You remember the helicopter the hotel owns. 
 
-[1] Steal the plane!
+[1] Steal the helicopter!
 [2] What?!
-""")
+
+Do you want to fly??: """)
         hullumyrskylentovalinta = numerochecker(hullumyrskylentovalinta, 2)
         if hullumyrskylentovalinta == 1:
-            print("""You jump on the plane and pierce the stormy sky.
+            asci('maniac')
+            print("""You jump on the helicopter and pierce the stormy sky.
 You will do whatever it takes to find your target.""")
             return 1
         else:
-            print("""Your sentient body drags your reluctant mind inside the plane.
+            asci('maniac')
+            print("""Your sentient body drags your reluctant mind inside the helicopter.
 You fly though the thundering skies realizing that your body has a mission of its own""")
             return 1
 
 
     elif valinta == 11:
-        print("The weather report looks stormy")
+        print("The weather report talks about a small hurricane in the area.\nThe hotel you are staying at isn't letting anyone leave today.")
         myrskylentovalinta = input("""
-The airport PSA says that all flights have been cancelled for the day because of the poor weather conditions.
+[1] Spend the day piecing together possible clues at the hotel.
+[2] Explain the "nuclear" situation to the hotel management to get out of the hotel
 
-[1] Spend the day piecing together possible clues.
-[2] Explain the situation airport management hoping for a quick transfer to a nearby airport.""")
+Do you stay at the hotel: """)
         myrskylentovalinta = numerochecker(myrskylentovalinta, 2)
         if myrskylentovalinta == 1:
             lentovihjemahdollisuus = random.randint(1, 6)
             if lentovihjemahdollisuus == 1:
-                print("After a long night of looking at all the pieces you figured out something! ")
+                print("After a long night of looking at your files of the case, you noctice a person you didn't see before"
+"in the cctv footage from the night of the nuke robbery")
                 return 9
             else:
-                print("You spent the night staring at the ceiling not seeing any possible connections.")
+                print("You spent the night staring at the ceiling not seeing any possible connections in your files.")
                 return 3
         else:
             lentosiirtomahdollisuus = random.randint(1, 6)
             if lentosiirtomahdollisuus == 1:
-                print("They were able to quickly get you to a small nearby airport with a plane ready.")
+                print('They suprisingly let you out saying "These so called hurricanes happen all the time here".')
                 return 1
             else:
                 print("They called you a liar and told you to wait for tomorrow.")

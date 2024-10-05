@@ -166,10 +166,10 @@ def main():
             elif minipelitulos == 7:
                 print("You lost a day!")
                 day += 1
-                print('You lost the trait "Food poisoning".')
+                print('You lost the trait "Food poisoning"... Good.')
                 foodpoisoning = 0
             elif minipelitulos == 8:
-                print("You got a gun.")
+                print("You got a gun... even though it seems to be an antique.")
                 gun = 1
                 guns=1
                 asci_lib.asci("GUN")
@@ -185,7 +185,7 @@ def main():
                 gun = 0
                 print_clue(suspect, given_clues)
             elif minipelitulos == 12:
-                print('You regain your sanity (Lost trait "Mad")')
+                print('You regain your sanity. (Lost trait "Mad")')
                 madness = 0
             input('\nPress enter to continue')
 
