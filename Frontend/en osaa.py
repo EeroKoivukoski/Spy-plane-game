@@ -68,7 +68,7 @@ def main():
     km_flown = player["km_flown"]
     day = player["day"]
     last_move_day = player["last_move_day"]
-    given_clues = given_clues
+    given_clues = player["given_clues"]
     last = 0
 
     # Tutorial
@@ -429,7 +429,7 @@ def get_player_data(username):
             "km_flown": result[0][8],
             "day": result[0][9],
             "last_move_day": result[0][10],
-            "given_clue": result[0][11],
+            "given_clues": result[0][11],
         }
     return data
 
@@ -447,7 +447,7 @@ def update_player(player):
     km_flown = {player["km_flown"]},
     day = {player["day"]},
     last_move_day = {player["last_move_day"]},
-    given_clue = {player["given_clue"]}
+    given_clue = {player["given_clues"]}
     where name = '{player["name"]}'
     """
     cursor = connection.cursor()
@@ -468,7 +468,7 @@ def insert_new_player(player):
     '{player["km_flown"]}',
     '{player["day"]}',
     '{player["last_move_day"]}',
-    '{player["given_clue"]}')
+    '{player["given_clues"]}')
 """
     cursor = connection.cursor()
     cursor.execute(sql)
