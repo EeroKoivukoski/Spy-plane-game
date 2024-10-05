@@ -65,8 +65,9 @@ You get a call from HQ
 The Call is from your boss who tells you that they found new data on the suspect.
 """)
         return 2
-    # Ruokaika (todo: Ruokamyrkytyksen mahdollisuus on eri rippuen maasta missä olet, myös ascii)
+    # Ruokaika
     elif valinta == 3:
+        asci('RUOKA')
         print("""
 You felt quite hungry and chose to go for a bite.
 You ate street food at a grill for cheap.
@@ -115,7 +116,7 @@ Do you want the make a deal?: """)
         else:
             print("You leave the card behind while thinking about the possibility that it could have been stolen. :(")
             return 1
-    # Tappelu konnien kanssa (todo:voisi olla toisia mahdollisia lopputuloksia esim. konnat lähtevät jahtaamaan, myös ascii)
+    # Tappelu konnien kanssa
     elif valinta == 5:
         asci('intimidating')
         print('''You are moving through the city until you come accross three intimidating fellows.
@@ -204,9 +205,8 @@ You decide to ask them about the spy you're tracking and
 they do not find him and you leave the stand with a grin on your face.
 ''')
                 return 1
-    # Madness bad event (todo: ascii)
+    # Madness bad event
     elif valinta == 7 and madness == 1:
-        asci('maniac')
         print('''
 You are walking at the airport and you feel that the world is against you.
 [1] Fight
@@ -215,10 +215,12 @@ You are walking at the airport and you feel that the world is against you.
         schizo = input('Do you want to fight the airport: ')
         schizo = numerochecker(schizo,2)
         if schizo == 1:
+            asci('maniac')
             print("""You fight the airport and punch a hole through a wall. You got detained 
 but your violence felt justified. """)
             return 12
         else:
+            asci('maniac')
             print("""You fight the airport and break a door despite your decision.
 You waste a day in jail. """)
             return 3
