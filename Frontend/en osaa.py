@@ -36,7 +36,8 @@ def main():
         "km_flown": 0,
         "day": 0,
         "last_move_day": 0,
-        "given_clues": "0",
+        "given_clues_keys": "0",
+        "given_clues_values": "0"
     }
 
     data = get_player_data(username)
@@ -67,7 +68,7 @@ def main():
     km_flown = player["km_flown"]
     day = player["day"]
     last_move_day = player["last_move_day"]
-    given_clues = player["given_clues"]
+    given_clues = {player["given_clues_keys"]: player["given_clues_values"]}
     if given_clues == "0":
         given_clues = []
     last = 0
@@ -410,7 +411,7 @@ def print_clue(suspect, given_clues):
 
 def get_player_data(username):
     sql = f"""
-    select name, current, suspect, enemy_airport, madness, foodpoisoning, gun, guns, km_flown, day, last_move_day, given_clues from test_game
+    select name, currentname,currentcountry,currentlatitude,currentlongitude, suspectheight,suspectage,suspectgender,suspectclothes,suspecthead,enemy_airport_name, enemy_airport_country, enemy_airport_latitude,enemy_airport_longitude, madness, foodpoisoning, gun, guns, km_flown, day, last_move_day, given_clues_keys, given_clues_values from test_game
     where name = '{username}'
     """
     cursor = connection.cursor()
@@ -459,9 +460,19 @@ def insert_new_player(player):
     sql = f"""
     insert into test_game values
     ('{player["name"]}',
-    '{player["current"]}',
-    '{player["suspect"]}',
-    '{player["enemy_airport"]}',
+    '{player["current"]["name"]}',
+    '{player["current"]["country"]}',
+    '{player["current"]["latitude"]}',
+    '{player["current"]["longitude"]}',
+    '{player["suspect"]["height"]}',
+    '{player["suspect"]["age"]}',
+    '{player["suspect"]["gender"]}',
+    '{player["suspect"]["clothes"]}',
+    '{player["suspect"]["head"]}',
+    '{player["enemy_airport"]["name"]}',
+    '{player["enemy_airport"]["country"]}',
+    '{player["enemy_airport"]["latitude"]}',
+    '{player["enemy_airport"]["longitude"]}',
     '{player["madness"]}',
     '{player["foodpoisoning"]}',
     '{player["gun"]}',
@@ -469,7 +480,8 @@ def insert_new_player(player):
     '{player["km_flown"]}',
     '{player["day"]}',
     '{player["last_move_day"]}',
-    '{player["given_clues"]}')
+    '{player["given_clues_keys"]}',
+    '{player["given_clues_values"]}')
 """
     cursor = connection.cursor()
     cursor.execute(sql)
