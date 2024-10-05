@@ -64,7 +64,8 @@ def main():
 
     # Main loop
     while True:
-
+        if day < 0:
+            day = 0
         # Lopeta peli jos päivät täynnä
         if max_days <= day:
             asci_lib.asci("gameover")
