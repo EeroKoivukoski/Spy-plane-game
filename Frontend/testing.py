@@ -20,8 +20,11 @@ enemy = {}
 
 
 def main():
-    all_airports = get_airports()
+    #Intro ja login
+    asci_lib.asci("intro")
+    input("Enter your name to start the game")
 
+    all_airports = get_airports()
     #Rosvon ulkonäkö
     suspect = generate_person()
 
@@ -43,9 +46,8 @@ def main():
     # clues = 0
     given_clues = []
     max_days = 30
-    # Intro
-    asci_lib.asci("intro")
-    input("Press enter to start the game")
+
+    #Tutorial
     asci_lib.asci('tutorial')
     tutorial=input('')
     tutorial=Usualsuspects.numerochecker(tutorial,2)
