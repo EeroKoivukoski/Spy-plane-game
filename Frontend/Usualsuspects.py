@@ -77,7 +77,7 @@ You ate street food at a grill for cheap.
             return 6
         else:
             return 1
-    # Hukkunut lippu (todo: voisi tehdä kiinnostavamman, myös ascii)
+    # Hukkunut lippu
     elif valinta == 4:
         print("""
 While walking through the city like you usually do, 
