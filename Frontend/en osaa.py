@@ -67,7 +67,9 @@ def main():
     km_flown = player["km_flown"]
     day = player["day"]
     last_move_day = player["last_move_day"]
-    given_clues = []
+    given_clues = player["given_clues"]
+    if given_clues == "0":
+        given_clues = []
     last = 0
 
     # Tutorial
@@ -408,7 +410,7 @@ def print_clue(suspect, given_clues):
 
 def get_player_data(username):
     sql = f"""
-    select name, current, suspect, enemy_airport, madness, foodpoisoning, gun, guns, km_flown, day, last_move_day, given_clue from test_game
+    select name, current, suspect, enemy_airport, madness, foodpoisoning, gun, guns, km_flown, day, last_move_day, given_clues from test_game
     where name = '{username}'
     """
     cursor = connection.cursor()
