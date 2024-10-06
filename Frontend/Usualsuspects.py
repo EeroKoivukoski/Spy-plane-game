@@ -18,7 +18,7 @@ def numerochecker(y,z):
 
 
 def minipeli(country,madness,foodpoisoning,gun,guns):
-    valinta = random.randint(1, 11)
+    valinta = random.randint(10, 10)
     # Madness good event
     if valinta == 1 and madness == 1:
         asci('maniac')
@@ -448,8 +448,8 @@ the speed limit.
                         else:
                             print("You dodge the car and you run away unharmed.")
                             return 1
-        else:
-                input("You leave the car alone.")
+            else:
+                print("You leave the car alone.\n")
                 return 1
 
     elif valinta == 11 and madness == 1:
