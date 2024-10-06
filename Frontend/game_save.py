@@ -291,22 +291,6 @@ def main():
             "given_clues": given_clues,
         }
         update_player(player)
-        suspect = {"height": player["suspectheight"], "age": player["suspectage"], "gender": player["suspectgender"],
-                   "clothes": player["suspectclothes"], "head": player["suspecthead"]}
-        current = {"name": player["currentname"], "country": player["currentcountry"],
-                   "latitude": player["currentlatitude"], "longitude": player["currentlongitude"]}
-        enemy_airport = {"name": player["enemy_airport_name"], "country": player["enemy_airport_country"],
-                         "latitude": player["enemy_airport_latitude"], "longitude": player['enemy_airport_longitude']}
-        madness = player["madness"]
-        foodpoisoning = player["foodpoisoning"]
-        gun = player["gun"]
-        guns = player["guns"]
-        km_flown = player["km_flown"]
-        day = player["day"]
-        last_move_day = player["last_move_day"]
-        given_clues = player["given_clues"]
-        given_clues = list(given_clues.split("@"))
-
 
 def get_closest_airports(current, count):
     # Hae kaikki kentät listaan

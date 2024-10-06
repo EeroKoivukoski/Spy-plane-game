@@ -382,6 +382,7 @@ You wasted a day due to your cancelled flight.
                 return 3
 
     elif valinta == 10:
+        asci("car")
         print('''
 You are walking trough the city until a car stops in front of you.
 The door opens and you think about entering this luxurious limousine.
