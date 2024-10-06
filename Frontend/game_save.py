@@ -82,7 +82,7 @@ def main():
     day = player["day"]
     last_move_day = player["last_move_day"]
     given_clues=player["given_clues"]
-    given_clues = list(given_clues.replace("@",",").split(","))
+    given_clues = list(given_clues.split("@"))
 
 
 
@@ -108,7 +108,7 @@ def main():
     if len(given_clues) > 2:
         x=len(given_clues)-2
         while x != 0:
-            print("You know the spies following fetures: ",suspect[given_clues[1+x]])
+            print(f"You know the spies following features: {suspect[given_clues[1+x]]}")
             x-=1
     # Main loop
     while True:
@@ -291,6 +291,7 @@ def main():
             "given_clues": given_clues,
         }
         update_player(player)
+        given_clues = list(given_clues.split("@"))
 
 def get_closest_airports(current, count):
     # Hae kaikki kentät listaan
