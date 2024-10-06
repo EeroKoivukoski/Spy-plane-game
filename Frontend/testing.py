@@ -22,7 +22,7 @@ enemy = {}
 def main():
     #Intro ja login
     asci_lib.asci("intro")
-    input("Enter your name to start the game")
+    input("Enter your name to start the game: ")
 
     all_airports = get_airports()
     #Rosvon ulkonäkö
@@ -107,7 +107,7 @@ def main():
         # Lennä muualle
         if eveningoptions == 1:
             day+=1
-            print("Where would you like to fly next?")
+            print("Where would you like to fly next? ")
             print(f"You are currently at {current['name']} in {current['country']}.")
             print(f"{navigation(current, enemy_airport)}\n")
 
