@@ -82,7 +82,7 @@ def main():
     day = player["day"]
     last_move_day = player["last_move_day"]
     given_clues=player["given_clues"]
-    given_clues = list(given_clues.replace("@",",").split(","))
+    given_clues = list(given_clues.replace("@"," ").split(" "))
 
 
 
@@ -291,6 +291,7 @@ def main():
             "given_clues": given_clues,
         }
         update_player(player)
+
 
 def get_closest_airports(current, count):
     # Hae kaikki kentät listaan
