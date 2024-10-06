@@ -18,7 +18,7 @@ def numerochecker(y,z):
 
 
 def minipeli(country,madness,foodpoisoning,gun,guns):
-    valinta = random.randint(10, 10)
+    valinta = random.randint(1, 11)
     # Madness good event
     if valinta == 1 and madness == 1:
         asci('maniac')
