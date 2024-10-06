@@ -94,8 +94,8 @@ You probably accidentally dropped your card.
             if z > 6:
                 choiceinfo=input("""
 You find your card under a bench you sat at before. You noticed that under the bench next to your card is a message
-which says "You dont know me. But I know who you are searching for. Let's make a deal!". 
-The deal is you drop off a file under a bridge nearby then after that 
+that says "You dont know me. But I know who you are searching for. Let's make a deal!". 
+The deal is you drop off a file under a bridge nearby then afterwhich 
 you will get a location where info of the suspect is hidden.
 
 [1] Make a deal with the stranger
@@ -120,7 +120,7 @@ Do you want the make a deal?: """)
     elif valinta == 5:
         asci('intimidating')
         print('''You are moving through the city until you come accross three intimidating fellows.
-One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack".
+One of the goons whispers to the other "hey, isn't that the guy we're supposed to whack?".
     
 [1] Fight
 [2] Run
@@ -145,7 +145,7 @@ One of the goons whispers to the other "hey, isn't that the guy we're supposed t
             print("You successfully run away!")
             return 1
         if choice == 3:
-            print("You win the fight and interrogate the goons!"
+            print("You win the fight and interrogate the goons! "
                   "You lose your gun in the mettle.")
             return 11
 
@@ -167,7 +167,7 @@ You have to walk past them.
             rngkoju=random.randint(1,4)
             if rngkoju == 1:
                 print('''
-You for some reason decide to talk with the advertisers.
+For some reason you decide to talk with the advertisers.
 They apparently are advetising a rocket travel company and are
 offering a free test ride to the first customer.
 ''')
@@ -385,7 +385,7 @@ You wasted a day due to your cancelled flight.
         asci("car")
         print('''
 You are walking trough the city until a car stops in front of you.
-The door opens and you think about entering this luxurious limousine.
+The door of the luxurious limousine opens on its own, almost inviting you in.
  
  [1] Enter the car
  [2] Don't enter the car
@@ -404,7 +404,7 @@ the speed limit.
                 print("You sit in the limo and it's your childhood friend, he tells you he saw you on the streets and decided to give you a ride")
                 return 4
             else:
-                print("You sit in the car and immediately the door closes behind you. You look up but before you see who is standing inside the limo\n you get knocke out.\n\nYou wake up in the middle of the city and you noctice the day has gone.")
+                print("You sit in the car and immediately the door closes behind you. You look up but before you see who is standing inside the limo\n you get knocked out.\n\nYou wake up in the middle of the city and you notice the day has gone.")
                 return 3
         elif auto == 2:
             if random.randint(1,2) == 1:
@@ -417,7 +417,7 @@ the speed limit.
                             print("You barely got hit by the car! the car leaves while you lay on the ground and you go to the hospital.")
                             return 3
                         else:
-                            print("The Car barely misses you since it didn't fit in the alley. You pull the driver out of the  car and get\ninformation about the spy for letting him leave.")
+                            print("The Car barely misses you since it didn't fit in the alley, and crashes. You pull the driver out of the  car and get\ninformation about the spy for letting him leave.")
                             return 2
                     elif autokarku == 2:
                         if random.randint(1, 3) <= 2:
@@ -427,7 +427,7 @@ the speed limit.
                             print("You dodge the car and you run away.")
                             return 1
                     else:
-                        print("You shoot at the driver and hit him.\nThe car stops and you interrogate the driver while giving him aid.\nYour gun broke when you fired it. I guess you shouldnt use antiques.")
+                        print("You shoot at the driver and hit him.\nThe car stops and you interrogate the driver while giving him aid.\nYour gun malfunctions and breaks after a single shot. So much for selling the antique..")
                         return 11
                 if gun == 0:
                     print("The car starts chasing you and you have to decide on the counteraction!\n\n[1] Try to get to the nearby alley\n\n[2] Try to dodge the car")
@@ -436,11 +436,11 @@ the speed limit.
                     if autokarku == 1:
                         if random.randint(1, 3) <= 2:
                             print(
-                                "You barely got hit by the car! The car leaves while you lay on the ground. \You somehow don't feel like anythings broken but you go to the hospital anyways.")
+                                "You barely got hit by the car! The car leaves while you lay on the ground. \Seems you got lucky with only a bruise, a painful one at that.")
                             return 3
                         else:
                             print(
-                                "The Car barely misses you since it didn't fit in the alley. You pull the driver out of the  car and get\ninformation about the spy for letting him leave.")
+                                "The Car barely misses you since it didn't fit in the alley, and crashes. You pull the driver out of the car and get\ninformation about the spy for letting him leave.")
                             return 2
                     else:
                         if random.randint(1, 3) <= 2:
