@@ -25,8 +25,6 @@ def main():
     current = random.choice(all_airports)
     last = 0
     enemy_airport = random.choice(all_airports)
-    given_clues=[]
-
 
     asci_lib.asci("intro")
     username = input("Enter your name to start the game: ")
@@ -53,8 +51,7 @@ def main():
         "km_flown": 0,
         "day": 0,
         "last_move_day": 0,
-        "given_clues_keys": "0",
-        "given_clues_values": "0",
+        "given_clues": "Given@Clues",
     }
 
     data = get_player_data(username)
@@ -85,6 +82,9 @@ def main():
     km_flown = player["km_flown"]
     day = player["day"]
     last_move_day = player["last_move_day"]
+    given_clues=player["given_clues"]
+    given_clues = list(given_clues.replace("@",",").split(","))
+
 
 
     # Tutorial
@@ -106,6 +106,11 @@ def main():
             asci_lib.asci('missionnah')
             exit()
 
+    if len(given_clues) > 2:
+        x=len(given_clues)-2
+        while x != 0:
+            print("You know the spies following fetures: ",suspect[given_clues[1+x]])
+            x-=1
     # Main loop
     while True:
         if day < 0:
@@ -114,6 +119,7 @@ def main():
         if 30 < day:
             asci_lib.asci("gameover")
             exit()
+
 
         # Tulosta info
         if last == 0:
@@ -260,11 +266,22 @@ def main():
                 print("You arrested an innocent person. The spy hears about it and moves to another airport.")
                 enemy_airport = random.choice(all_airports)
 
+        given_clues="@".join(given_clues)
         player = {
             "name": username,
-            "current": current,
-            "suspect": suspect,
-            "enemy_airport": enemy_airport,
+            "currentname":current["name"] ,
+            "currentcountry": current["country"],
+            "currentlatitude": current["latitude"],
+            "currentlongitude": current["longitude"],
+            "suspectheight": suspect["height"],
+            "suspectage": suspect["age"],
+            "suspectgender": suspect["gender"],
+            "suspectclothes": suspect["clothes"],
+            "suspecthead": suspect["head"],
+            "enemy_airport_name": enemy_airport["name"],
+            "enemy_airport_country": enemy_airport["country"],
+            "enemy_airport_latitude": enemy_airport["latitude"],
+            "enemy_airport_longitude": enemy_airport["longitude"],
             "madness": madness,
             "foodpoisoning": foodpoisoning,
             "gun": gun,
@@ -275,6 +292,21 @@ def main():
             "given_clues": given_clues,
         }
         update_player(player)
+        suspect = {"height": player["suspectheight"], "age": player["suspectage"], "gender": player["suspectgender"],
+                   "clothes": player["suspectclothes"], "head": player["suspecthead"]}
+        current = {"name": player["currentname"], "country": player["currentcountry"],
+                   "latitude": player["currentlatitude"], "longitude": player["currentlongitude"]}
+        enemy_airport = {"name": player["enemy_airport_name"], "country": player["enemy_airport_country"],
+                         "latitude": player["enemy_airport_latitude"], "longitude": player['enemy_airport_longitude']}
+        madness = player["madness"]
+        foodpoisoning = player["foodpoisoning"]
+        gun = player["gun"]
+        guns = player["guns"]
+        km_flown = player["km_flown"]
+        day = player["day"]
+        last_move_day = player["last_move_day"]
+        given_clues = player["given_clues"]
+        given_clues = list(given_clues.split("@"))
 
 
 def get_closest_airports(current, count):
@@ -400,7 +432,7 @@ def describe_person(p):
 
 def print_clue(suspect, given_clues):
     # Jos annetut vihjeet on tuntomerkkien määrä -> kaikki vihjeet annettu
-    if len(given_clues) == len(suspect.keys()):
+    if (len(given_clues))-2 == len(suspect.keys()):
         print("All clues given!")
         return
 
@@ -425,7 +457,7 @@ def print_clue(suspect, given_clues):
 
 def get_player_data(username):
     sql = f"""
-    select name, currentname,currentcountry,currentlatitude,currentlongitude, suspectheight,suspectage,suspectgender,suspectclothes,suspecthead,enemy_airport_name, enemy_airport_country, enemy_airport_latitude,enemy_airport_longitude, madness, foodpoisoning, gun, guns, km_flown, day, last_move_day, given_clues_keys, given_clues_values from test_game
+    select name, currentname,currentcountry,currentlatitude,currentlongitude, suspectheight,suspectage,suspectgender,suspectclothes,suspecthead,enemy_airport_name, enemy_airport_country, enemy_airport_latitude,enemy_airport_longitude, madness, foodpoisoning, gun, guns, km_flown, day, last_move_day, given_clues from test_game
     where name = '{username}'
     """
     cursor = connection.cursor()
@@ -455,8 +487,7 @@ def get_player_data(username):
             "km_flown": result[0][18],
             "day": result[0][19],
             "last_move_day": result[0][20],
-            "given_clues_keys": result[0][21],
-            "given_clues_values": result[0][22],
+            "given_clues": result[0][21],
         }
     return data
 
@@ -468,16 +499,23 @@ def update_player(player):
     currentcountry = '{player["currentcountry"]}',
     currentlatitude = '{player["currentlatitude"]}',
     currentlongitude ='{player["currentlongitude"]}',
-    suspect = '{player["suspect"]}',
-    enemy_airport = '{player["enemy_airport"]}',
-    madness = {player["madness"]},
-    foodpoisoning = {player["foodpoisoning"]},
-    gun = {player["gun"]},
-    guns = {player["guns"]},
-    km_flown = {player["km_flown"]},
-    day = {player["day"]},
-    last_move_day = {player["last_move_day"]},
-    given_clue = {player["given_clues"]}
+    suspectheight = '{player["suspectheight"]}',
+    suspectage = '{player["suspectage"]}',
+    suspectgender = '{player["suspectgender"]}',
+    suspectclothes = '{player["suspectclothes"]}',
+    suspecthead = '{player["suspecthead"]}',
+    enemy_airport_name = '{player["enemy_airport_name"]}',
+    enemy_airport_country = '{player["enemy_airport_country"]}',
+    enemy_airport_latitude = '{player["enemy_airport_latitude"]}',
+    enemy_airport_longitude = '{player["enemy_airport_longitude"]}',
+    madness = '{player["madness"]}',
+    foodpoisoning = '{player["foodpoisoning"]}',
+    gun = '{player["gun"]}',
+    guns = '{player["guns"]}',
+    km_flown = '{player["km_flown"]}',
+    day = '{player["day"]}',
+    last_move_day = '{player["last_move_day"]}',
+    given_clues = '{player["given_clues"]}'
     where name = '{player["name"]}'
     """
     cursor = connection.cursor()
@@ -488,19 +526,19 @@ def insert_new_player(player):
     sql = f"""
     insert into test_game values
     ('{player["name"]}',
-    '{player["current"]["name"]}',
-    '{player["current"]["country"]}',
-    '{player["current"]["latitude"]}',
-    '{player["current"]["longitude"]}',
-    '{player["suspect"]["height"]}',
-    '{player["suspect"]["age"]}',
-    '{player["suspect"]["gender"]}',
-    '{player["suspect"]["clothes"]}',
-    '{player["suspect"]["head"]}',
-    '{player["enemy_airport"]["name"]}',
-    '{player["enemy_airport"]["country"]}',
-    '{player["enemy_airport"]["latitude"]}',
-    '{player["enemy_airport"]["longitude"]}',
+    '{player["currentname"]}',
+    '{player["currentcountry"]}',
+    '{player["currentlatitude"]}',
+    '{player["currentlongitude"]}',
+    '{player["suspectheight"]}',
+    '{player["suspectage"]}',
+    '{player["suspectgender"]}',
+    '{player["suspectclothes"]}',
+    '{player["suspecthead"]}',
+    '{player["enemy_airport_name"]}',
+    '{player["enemy_airport_country"]}',
+    '{player["enemy_airport_latitude"]}',
+    '{player["enemy_airport_longitude"]}',
     '{player["madness"]}',
     '{player["foodpoisoning"]}',
     '{player["gun"]}',
@@ -508,8 +546,7 @@ def insert_new_player(player):
     '{player["km_flown"]}',
     '{player["day"]}',
     '{player["last_move_day"]}',
-    '{player["given_clues_keys"]}',
-    '{player["given_clues_values"]}')
+    '{player["given_clues"]}')
 """
     cursor = connection.cursor()
     cursor.execute(sql)
