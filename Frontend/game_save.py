@@ -2,9 +2,8 @@ import random
 import mysql.connector
 from geopy import distance
 import tietokantatunnukset
-import Usualsuspects
+import minipeli
 import asci_lib
-from Frontend.Usualsuspects import numerochecker
 
 # asenna python packaget geopy, mysql-connector-python 8.0.29
 
@@ -58,7 +57,7 @@ def main():
 
     if data:
         sel = input("[1]Uusi peli \n[2]Jatka vanhaa")
-        sel = numerochecker(sel, 2)
+        sel = minipeli.numerochecker(sel, 2)
         if sel == 2:
             player = data
             continue_check = 1
@@ -91,7 +90,7 @@ def main():
     if continue_check == 0:
         asci_lib.asci('tutorial')
         tutorial = input('')
-        tutorial = Usualsuspects.numerochecker(tutorial, 2)
+        tutorial = minipeli.numerochecker(tutorial, 2)
         if tutorial == 1:
             print("you selected option 1")
         else:
@@ -101,7 +100,7 @@ def main():
     if continue_check == 2 or continue_check == 0:
         asci_lib.asci("loreone")
         mission = input()
-        mission = Usualsuspects.numerochecker(mission, 2)
+        mission = minipeli.numerochecker(mission, 2)
         if mission == 2:
             asci_lib.asci('missionnah')
             exit()
@@ -148,11 +147,11 @@ def main():
         if current == enemy_airport:
             eveningoptions = input(
                 '\n[1] Fly to another airport \n[2] Look around \n[3] try to guess who the spy is at this airport \nWhat do you want to do: ')
-            eveningoptions = Usualsuspects.numerochecker(eveningoptions, 3)
+            eveningoptions = minipeli.numerochecker(eveningoptions, 3)
         else:
             eveningoptions = input(
                 '\n[1] Fly to another airport \n[2] Stay at this airport  \nWhat do you want to do: ')
-            eveningoptions = Usualsuspects.numerochecker(eveningoptions, 2)
+            eveningoptions = minipeli.numerochecker(eveningoptions, 2)
 
         # Lennä muualle
         if eveningoptions == 1:
@@ -199,7 +198,7 @@ def main():
         # Koodi toistuu
         # todo: minipelin tulos toiseen funktioon (rakennetta uusiksi?)
         elif eveningoptions == 2:
-            minipelitulos = Usualsuspects.minipeli(current['country'], madness, foodpoisoning, gun, guns)
+            minipelitulos = minipeli.minipeli(current['country'], madness, foodpoisoning, gun, guns)
             if minipelitulos == 2:
                 print_clue(suspect, given_clues)
             elif minipelitulos == 3:
@@ -292,22 +291,6 @@ def main():
             "given_clues": given_clues,
         }
         update_player(player)
-        suspect = {"height": player["suspectheight"], "age": player["suspectage"], "gender": player["suspectgender"],
-                   "clothes": player["suspectclothes"], "head": player["suspecthead"]}
-        current = {"name": player["currentname"], "country": player["currentcountry"],
-                   "latitude": player["currentlatitude"], "longitude": player["currentlongitude"]}
-        enemy_airport = {"name": player["enemy_airport_name"], "country": player["enemy_airport_country"],
-                         "latitude": player["enemy_airport_latitude"], "longitude": player['enemy_airport_longitude']}
-        madness = player["madness"]
-        foodpoisoning = player["foodpoisoning"]
-        gun = player["gun"]
-        guns = player["guns"]
-        km_flown = player["km_flown"]
-        day = player["day"]
-        last_move_day = player["last_move_day"]
-        given_clues = player["given_clues"]
-        given_clues = list(given_clues.split("@"))
-
 
 def get_closest_airports(current, count):
     # Hae kaikki kentät listaan

@@ -2,7 +2,7 @@ import random
 import mysql.connector
 from geopy import distance
 import tietokantatunnukset
-import Usualsuspects
+import minipeli
 import asci_lib
 #asenna python packaget geopy, mysql-connector-python 8.0.29
 
@@ -50,7 +50,7 @@ def main():
     #Tutorial
     asci_lib.asci('tutorial')
     tutorial=input('')
-    tutorial=Usualsuspects.numerochecker(tutorial,2)
+    tutorial=minipeli.numerochecker(tutorial,2)
     if tutorial == 1:
         print("you selected option 1")
     else:
@@ -58,7 +58,7 @@ def main():
     input("press any key to continue")
     asci_lib.asci("loreone")
     mission=input()
-    mission=Usualsuspects.numerochecker(mission,2)
+    mission=minipeli.numerochecker(mission,2)
     if mission == 2:
         asci_lib.asci('missionnah')
         exit()
@@ -99,10 +99,10 @@ def main():
         # todo: jos samalla kentällä kuin rosvo -> suoraan guess who-arvailuun, ei muita vaihtoehtoja (miksi?)
         if current == enemy_airport:
             eveningoptions = input('\n[1] Fly to another airport \n[2] Look around \n[3] try to guess who the spy is at this airport \nWhat do you want to do: ')
-            eveningoptions = Usualsuspects.numerochecker(eveningoptions, 3)
+            eveningoptions = minipeli.numerochecker(eveningoptions, 3)
         else:
             eveningoptions = input('\n[1] Fly to another airport \n[2] Stay at this airport  \nWhat do you want to do: ')
-            eveningoptions = Usualsuspects.numerochecker(eveningoptions, 2)
+            eveningoptions = minipeli.numerochecker(eveningoptions, 2)
 
         # Lennä muualle
         if eveningoptions == 1:
@@ -149,7 +149,7 @@ def main():
         # Koodi toistuu
         # todo: minipelin tulos toiseen funktioon (rakennetta uusiksi?)
         elif eveningoptions == 2:
-            minipelitulos = Usualsuspects.minipeli(current['country'],madness,foodpoisoning,gun,guns)
+            minipelitulos = minipeli.minipeli(current['country'],madness,foodpoisoning,gun,guns)
             if minipelitulos == 2:
                 print_clue(suspect, given_clues)
             elif minipelitulos == 3:

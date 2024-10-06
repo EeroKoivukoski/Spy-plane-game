@@ -382,6 +382,7 @@ You wasted a day due to your cancelled flight.
                 return 3
 
     elif valinta == 10:
+        asci("car")
         print('''
 You are walking trough the city until a car stops in front of you.
 The door of the luxurious limousine opens on its own, almost inviting you in.
@@ -448,8 +449,8 @@ the speed limit.
                         else:
                             print("You dodge the car and you run away unharmed.")
                             return 1
-        else:
-                input("You leave the car alone.")
+            else:
+                print("You leave the car alone.\n")
                 return 1
 
     elif valinta == 11 and madness == 1:
