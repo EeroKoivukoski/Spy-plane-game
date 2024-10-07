@@ -72,8 +72,8 @@ def main():
         insert_new_player(player)
 
     suspect = {"height": player["suspectheight"], "age": player["suspectage"],"gender":player["suspectgender"], "clothes":player["suspectclothes"], "head":player["suspecthead"]}
-    current = {"name": player["currentname"], "country": player["currentcountry"],"latitude": player["currentlatitude"],"longitude": player["currentlongitude"]}
-    enemy_airport = {"name": player["enemy_airport_name"], "country": player["enemy_airport_country"], "latitude": player["enemy_airport_latitude"], "longitude": player['enemy_airport_longitude']}
+    current = {"name": player["currentname"], "country": player["currentcountry"],"latitude": float(player["currentlatitude"]),"longitude": float(player["currentlongitude"])}
+    enemy_airport = {"name": player["enemy_airport_name"], "country": player["enemy_airport_country"], "latitude": float(player["enemy_airport_latitude"]), "longitude": float(player['enemy_airport_longitude'])}
     madness = player["madness"]
     foodpoisoning = player["foodpoisoning"]
     gun = player["gun"]
